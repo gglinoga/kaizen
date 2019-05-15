@@ -1,25 +1,51 @@
 import React from "react";
-import "./Navbar.css"
 
-const Navbar = props => (
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Kaizen</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Signup</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+const navStyle = {
+    background: "white",
+    fontFamily: 'Questrial',
+    height: "50px",
+    paddingLeft: "10px",
+    color: "black",
+    border: "black"
+}
+
+const navLeft = {
+    textAlign: "left",
+    fontSize: "20px",
+    img: {
+        width: "5px",
+    },
+    margin: "auto",    
+}
+
+const a = {
+    color: "black",
+}
+
+const navRight = {
+    textAlign: "bottom",
+    fontSize: "20px",
+    textAlign: "right",
+    paddingRight: "30px",
+    margin: "auto",
+
+}
+
+const Navbar = () => (
+        <div class="row" style={navStyle}>
+        <div class="col-4" style={navLeft}>
+                <a href="/" style={a}>LOGO </a>
+                <a href="/"style={a}> Kaizen   </a>
+                <a style={a}> /   </a>
+                <a href="/Course" style={a}> Course    </a>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4" style={navRight}>
+            <a href="#" style={a}>Login   </a>
+            <a href="#" style={a}>/       </a>
+            <a href="#" style={a}>User    </a>
+        </div>
+        </div>
 );
 
 export default Navbar;
