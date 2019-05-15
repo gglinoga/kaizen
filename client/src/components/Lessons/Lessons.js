@@ -1,16 +1,38 @@
 import React from "react";
-import "./Lessons.css"
+
+const style = {
+    width: "28%",
+    margin: "auto",
+}
+
+const flexParent = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: "500px",
+    flexWrap: "wrap",
+
+}
+
+const flexChild = {
+    width: "300px",
+    height: "150px",
+    backgroundColor: "white",
+    padding: "20px",
+    margin: "2px"
+}
+
 
 const Lessons = props => (
-    <div>
-        <div class="card">
-            <img src={props.image} class="card-img-top" alt={props.name} />
-            <div class="card-body">
-                <h5 class="card-title">Test Lesson Plan</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
+    <div class="flex-container" style={flexParent}>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+    <div style={flexChild}>Some quick example text to build on the card title and make up the bulk of the card's content</div>
+
+
     </div>
 );
 
