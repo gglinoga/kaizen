@@ -24,7 +24,7 @@ function App() {
       <Route exact path="/User" component={User}/>
       <Footer/>
     </div>
-    </Router>
+      </Router>
   );
 }
 
