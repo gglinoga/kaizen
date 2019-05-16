@@ -14,7 +14,6 @@ const Learning = props => (
                 <input type="radio" name="quiz" value={props.choice3} /> {props.choice3} <br />
                 <input type="submit" value="Submit" />
             </form>
-
         </div>
     </div>
 );
