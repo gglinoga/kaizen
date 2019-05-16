@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Navbar from './components/Navbar/Navbar.js';
 import Footer from './components/Footer/Footer.js';
 import Home from '../src/components/pages/Home.js';
 import Lesson from '../src/components/pages/Lesson.js';
@@ -17,7 +16,6 @@ function App() {
   return (
     <Router>
     <div style={style}>
-      <Navbar/>
       <Route exact path="/" component={Home}/>
       <Route exact path="/Lesson" component={Lesson}/>
       <Route exact path="/LessonComplete" component={LessonComplete}/>
