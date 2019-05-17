@@ -31,13 +31,13 @@ const navRight = {
 
 }
 
-const Navbar = () => (
+const Navbar = props => (
         <div class="row" style={navStyle}>
         <div class="col-4" style={navLeft}>
                 <a href="/" style={a}>LOGO </a>
                 <a href="/"style={a}> Kaizen   </a>
                 <a style={a}> /   </a>
-                <a href="/Course" style={a}> Course    </a>
+                <a href="/Course" style={a}> {props.courseTitle} </a>
         </div>
         <div class="col-4"></div>
         <div class="col-4" style={navRight}>
