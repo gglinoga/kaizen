@@ -1,5 +1,6 @@
 import React from "react";
 import Course from "../Course/Course.js";
+import Navbar from "../Navbar/Navbar";
 
 const style = {
 
@@ -44,9 +45,11 @@ const style = {
 }
 
 const Home = () => (
+        <div>
+        <Navbar/>
         <div style={style.home}>
         
-        <div classNameName="row" style={style.row1}></div>
+        <div className="row" style={style.row1}></div>
 
         <div className="row">
             <div className="col-2"></div>
@@ -80,6 +83,7 @@ const Home = () => (
             </div>
         </div>
         <div classNameName="row" style={style.row2}></div>
+        </div>
         </div>
         </div>
 )
