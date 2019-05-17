@@ -33,7 +33,7 @@ const navRight = {
 
 }
 
-const Navbar = () => (
+const Navbar = props => (
         <nav class="home">
         <div class="row" style={navStyle}>
         <div class="col-4" style={navLeft}>
