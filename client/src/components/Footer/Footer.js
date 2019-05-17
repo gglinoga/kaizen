@@ -1,8 +1,7 @@
 import React from "react";
 
 const style = {
-    backgroundColor: 'blue',
-    fontFamily: 'Questrial',
+    fontFamily: "'Cinzel', serif",
     textAlign: 'center',
     position: "fixed",
     left: "0",
@@ -10,6 +9,9 @@ const style = {
     width: "100%",
     height: "25px",
     margin: "auto",
+    backgroundImage: "url('https://stablekernel.com/wp-content/uploads/2017/04/basicGradient-054950-edited.png')",
+    color: "white"
+
 }
 
 const footerRight = {
@@ -22,7 +24,7 @@ const Footer = () => (
     <div class="Footer navbar-fixed-bottom" style={style}>
     <div class="row">
         <div class="col-4"></div>
-        <div class="col-4">kaizen ©</div>
+        {/* <div class="col-4">kaizen ©</div> */}
         <div class="col-4" style={footerRight}>
             <a>Live Support</a>
         </div>
