@@ -69,11 +69,7 @@ class Lesson extends Component {
                     choice3={this.state.quizzes[this.state.i].choice[3]}
                 >
                 </Learning>
-                </div>
-                {/* <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-8"><button onClick={this.updateLesson}>Next Page</button></div>
-                </div> */}
+                    <button onClick={this.updateLesson}>Next Page</button></div>
             </div>
             </div>
             </div>
