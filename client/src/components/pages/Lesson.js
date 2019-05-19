@@ -11,16 +11,22 @@ const style = {
         marginTop: "10px",
         margin: "auto",
         display: "table",
-        paddingBottom: "60px"
     },
 
     content: {
         backgroundColor: "white",
+        padding: "0px 30px 100px 30px"
+
     },
 
     row1: {
         height: "20px",
+    },
+
+    border: {
+        backgroundColor: "silver"
     }
+
 
 }
 
@@ -31,7 +37,7 @@ class Lesson extends Component {
         courseName: "Example Lesson",
         lessonNames: ["LESSON 1: Welcome to Something", "Lesson 2: I didn't think I will get this far"],
         lessonPic: ["https://techcrunch.com/wp-content/uploads/2015/04/codecode.jpg?w=730&crop=1", "https://images.code.org/ac720d8ae4d6380fc72c8d6659910bcf-image-1446407286955.png"],
-        lessonMaterial: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        lessonMaterial: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elit ipsum, commodo id mauris et, ullamcorper dignissim urna. Nullam sit amet ligula sit amet mi vestibulum tristique. Nunc iaculis, ipsum eu scelerisque viverra, tortor lorem efficitur felis, quis porta mi nisi eget nunc. Sed accumsan semper diam id porttitor."],
         quizzes: [{
             question: "What is an array?",
@@ -60,13 +66,12 @@ class Lesson extends Component {
         return (
             <div>
                 <Navbar courseTitle={this.state.courseName} />
-                <div class="container" style={style.home}>
-                    <div className="row" style={style.row1}></div>
+                <div class="container">
+                <Sidenav />
                     <div className="row">
-                        <Sidenav />
-                        <div className="col-2">
-                        </div>
-                        <div className="col-8">
+                        <div className="col-2"></div>
+                        <div className="col-8" style={style.content}>
+                        <div className="row" style={style.row1}></div>
                             <Learning
                                 courseName={this.state.lessonNames[this.state.i]}
                                 lessonPic={this.state.lessonPic[this.state.i]}
@@ -78,10 +83,11 @@ class Lesson extends Component {
                                 choice3={this.state.quizzes[this.state.i].choice[3]}
                             >
                             </Learning>
-                            <button onClick={this.updateLesson}>Next Page</button></div>
+                            <button onClick={this.updateLesson}>Next Page</button>
+                            </div>
+                    </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }

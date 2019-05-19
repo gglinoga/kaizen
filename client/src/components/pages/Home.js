@@ -5,16 +5,14 @@ import Navbar from "../Navbar/Navbar";
 const style = {
 
     home: {
-        height: "100%",
         backgroundColor: "silver",
-        paddingBottom: "200px"
+        height: "auto"
     },
 
     content: {
         backgroundColor: "white",
-        height: "auto",
-        marginBottom: "80px",
-        padding: "20px 30px 60px 30px",
+        padding: "20px 30px 500px 30px",
+        height: "100%"
 
     },
 
@@ -30,20 +28,12 @@ const style = {
     course: {
         justifyContent: "center"
     },
-
-    row1: {
-        height: "60px"
-    },
-
 }
 
 const Home = () => (
         <div>
         <Navbar/>
         <div style={style.home}>
-        
-        <div className="row" style={style.row1}></div>
-
         <div className="row">
             <div className="col-2"></div>
             <div className="col-8" style={style.content}>
