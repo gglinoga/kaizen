@@ -1,16 +1,18 @@
 import React from "react";
 
 const navStyle = {
-    backgroundImage: "url('https://stablekernel.com/wp-content/uploads/2017/04/basicGradient-054950-edited.png')",
-    fontFamily: "'Cinzel', serif",
+    backgroundImage: "linear-gradient(to right, blue, purple)",
+    fontFamily: "'Crimson Text', serif",
     fontWeight: "bolder",
     height: "auto",
     paddingLeft: "10px",
+    border: "2px grey solid",
+    fontcolor: "#faf7ac"
 }
 
 const navLeft = {
     textAlign: "left",
-    fontSize: "16px",
+    fontSize: "20px",
     margin: "auto",    
 }
 
@@ -26,7 +28,7 @@ const a = {
 
 const navRight = {
     textAlign: "bottom",
-    fontSize: "16px",
+    fontSize: "20px",
     textAlign: "right",
     paddingRight: "30px",
     margin: "auto",
@@ -43,8 +45,9 @@ const Navbar = props => (
                 <h2>kaizen</h2>
         </div>
         <div class="col-4" style={navRight}>
-            <a href="#" style={a}>login   | </a>
-            <a href="#" style={a}>user    </a>
+            <a href="#" style={a}>login    </a>
+            <a style={a}>|</a>
+            <a href="#" style={a}>     user    </a>
         </div>
         </div>
         </nav>

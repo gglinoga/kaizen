@@ -5,15 +5,16 @@ import Navbar from "../Navbar/Navbar";
 const style = {
 
     home: {
-        height: "auto",
+        height: "100%",
         backgroundColor: "silver",
+        paddingBottom: "200px"
     },
 
     content: {
         backgroundColor: "white",
         height: "auto",
         marginBottom: "80px",
-        padding: "20px 30px"
+        padding: "20px 30px 60px 30px",
 
     },
 
@@ -22,20 +23,12 @@ const style = {
         fontSize: "30px",
         backgroundColor: "white",
         textAlign: "center",
-        border: "darkgrey solid 2px",
         overflow: "auto",
-        color: "darkgrey",
-        padding: "20px",
-        marginBottom: "30px",
-        marginTop: "20px",
-        marginRight: "20px",
-        marginLeft: "20px",
-
-
+        padding: "20px"
     },
 
     course: {
-        marginTop: "40px"
+        justifyContent: "center"
     },
 
     row1: {
@@ -61,8 +54,7 @@ const Home = () => (
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col">
-                        <div className="d-flex flex-wrap">
+                    <div className="col-12 d-flex flex-wrap" style={style.course}>
                 <a href="/lesson">
                 <Course style={style.course} course=
                     {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
@@ -81,8 +73,6 @@ const Home = () => (
                 </div>
             </div>
             </div>
-        </div>
-        <div classNameName="row" style={style.row2}></div>
         </div>
         </div>
         </div>

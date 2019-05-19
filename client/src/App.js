@@ -8,7 +8,8 @@ import User from '../src/components/pages/User.js'
 
 
 const style = {
-  height: "100%"
+  height: "100%",
+  backgroundColor: "silver"
 }
 
 function App() {
