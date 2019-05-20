@@ -1,32 +1,30 @@
 import React from "react";
 
 const style = {
-    fontFamily: "'Cinzel', serif",
-    textAlign: 'center',
+    fontFamily: "'Crimson Text', serif",
     position: "fixed",
     left: "0",
     bottom: "0",
     width: "100%",
-    height: "25px",
+    height: "40px",
     margin: "auto",
-    backgroundImage: "url('https://stablekernel.com/wp-content/uploads/2017/04/basicGradient-054950-edited.png')",
-    color: "white"
-
-}
-
-const footerRight = {
+    backgroundImage: "linear-gradient(to right, blue, purple)",
+    color: "white",
+    border: "1px grey solid",
+    color: "steelblue",
     textAlign: "right",
     margin: "auto",
-    paddingRight: "20px"
+    fontSize: "20px",
+    paddingRight: "10px"
+
 }
 
 const Footer = () => (
     <div class="Footer navbar-fixed-bottom" style={style}>
     <div class="row">
-        <div class="col-4"></div>
-        {/* <div class="col-4">kaizen ©</div> */}
-        <div class="col-4" style={footerRight}>
-            <a>Live Support</a>
+        <div class="col-9"></div>
+        <div class="col-3">
+            <a href="#">live support      <i className="far fa-comment-dots"></i></a>
         </div>
         </div>
 

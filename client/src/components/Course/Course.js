@@ -2,25 +2,24 @@ import React from "react";
 import { MDBContainer } from "mdbreact";
 
 const style = {
-    container: {
-        display: "flex",
-    },
 
     card: {
         width: "200px",
         height: "175px",
         padding: "30px",
         fontFamily: "'Questrial', sans-serif",
-        backgroundColor: "royalblue",
         color: "white",
-        margin: "5px 5px"
+        margin: "5px 5px",
+        backgroundImage: "linear-gradient(to bottom, blue, red)",
+        border: "grey 2px solid"
+
     },
 }
 
 const Course = props => (
     <MDBContainer>
 
-    <div class="container" style={style.container}>
+    <div class="container">
     <div style={style.card}>
             <p>{props.course.title}</p>
             {/* <p>Description: {props.course.description}</p> */}
