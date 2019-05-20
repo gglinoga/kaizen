@@ -1,9 +1,20 @@
 import React from "react";
+import Navbar from "../Navbar/Navbar";
 
-function User () {
+function User() {
     return (
-        <h1>User</h1>
+        <div>
+            <Navbar/>
+            <div class="container">
+                <div className="row">
+                    <div className="col-2"></div>
+                    <div className="col-8">
+                    <div className="row"></div>
+                        </div>
+                </div>
+                </div>
+            </div>
     )
-}
+    }
 
 export default User;

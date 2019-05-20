@@ -13,12 +13,23 @@ const style = {
     },
 
     lessonMaterial: {
-        textAlign: "justify"
+        textAlign: "justify",
     },
 
     img: {
-        width: "100%",
+        width: "50%",
+        float: "right",
+        paddingLeft: "20px",
+        paddingTop: "5px",
+        paddingBottom: "5px"
+
     },
+
+    quiz: {
+        border: "black 2px solid",
+        padding: "10px 20px",
+        margin: "10px 10px"
+    }
 }
 
 class Learning extends Component {

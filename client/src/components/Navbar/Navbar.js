@@ -23,7 +23,7 @@ const navCenter = {
 }
 
 const a = {
-    color: "steelblue",
+    color: "white",
 }
 
 const navRight = {
