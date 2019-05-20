@@ -6,7 +6,7 @@ const style = {
 
     one: {
         backgroundColor: "blue",
-        height: "40vh",
+        height: "auto",
         paddingBottom: "100px",
         color: "white",
         fontSize: "1.75em",
@@ -16,7 +16,6 @@ const style = {
     },
 
 }
-
 
 
 function Sidenav2() {
@@ -29,49 +28,39 @@ function Sidenav2() {
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="home">
+
                     <NavItem eventKey="home">
                         <NavIcon>
                             <a href="/"><i className="fa fa-fw fa-home" /></a>
                         </NavIcon>
-                        <NavText>
-                            Home
-            </NavText>
+                        <NavText>Home</NavText>
                     </NavItem>
-                    <NavItem eventKey="charts">
-                        <NavIcon>
-                            <i className="fas fa-spinner"></i>
-                        </NavIcon>
+
+                    <NavItem eventKey="completedLessons">
+                        
+                        <NavIcon><i className="far fa-check-square"></i></NavIcon>
+                        <NavText>Completed</NavText>
+                        <NavItem eventKey="lesson1">
+                            <NavText>
+                            Lesson 1
+                        </NavText>
+                        </NavItem>
+                        <NavItem eventKey="lesson2">
                         <NavText>
-                            In Progress
-            </NavText>
+                            Lesson 2
+                        </NavText>
+                        </NavItem>
+
+                    </NavItem>
+
+                    <NavItem eventKey="currentLesson">
+                        <NavIcon><i className="fas fa-spinner"></i></NavIcon>
+                        <NavText>Current Lesson (Lesson 3) </NavText>
                         <NavItem eventKey="charts/linechart">
-                            <NavText>
-                                Lesson 3
-                </NavText>
-                        </NavItem>
-                        <NavItem eventKey="charts/barchart">
-                            <NavText>
-                                Lesson 4
-                </NavText>
                         </NavItem>
                     </NavItem>
-                    <NavItem eventKey="charts">
-                        <NavIcon>
-                            <i className="far fa-check-square"></i>                        </NavIcon>
-                        <NavText>
-                            Completed
-            </NavText>
-                        <NavItem eventKey="charts/linechart">
-                            <NavText>
-                                Lesson 1
-                </NavText>
-                        </NavItem>
-                        <NavItem eventKey="charts/barchart">
-                            <NavText>
-                                Lesson 2
-                </NavText>
-                        </NavItem>
-                    </NavItem>
+
+                    
                 </SideNav.Nav>
             </SideNav>
         </div>
