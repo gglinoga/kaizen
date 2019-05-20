@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from './components/Footer/Footer.js';
 import Home from '../src/components/pages/Home.js';
 import Lesson from '../src/components/pages/Lesson.js';
-import LessonComplete from '../src/components/pages/LessonComplete.js'
-import User from '../src/components/pages/User.js'
+import LessonComplete from '../src/components/pages/LessonComplete.js';
+import User from '../src/components/pages/User.js';
 
 
 const style = {

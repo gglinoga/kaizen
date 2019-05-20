@@ -1,19 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import Course from "../Course/Course.js";
 import Navbar from "../Navbar/Navbar";
+import Modal from "../../components/Modal/Modal"
 
 const style = {
 
     home: {
-        height: "auto",
+        height: "100%",
+        width: "100%",
         backgroundColor: "silver",
+        position: "absolute",
+        align: "center",
+        zIndex: -2
     },
 
     content: {
         backgroundColor: "white",
         height: "auto",
         marginBottom: "80px",
-        padding: "20px 30px"
+        padding: "20px 30px",
+        zIndex: -1,
+        align: "center"
 
     },
 
@@ -44,11 +51,33 @@ const style = {
 
 }
 
-const Home = () => (
+class Home extends Component {
+    state = {
+        show: false
+    }
+    showModal = () => {
+        this.setState({
+            ...this.state,
+            show: !this.state.show
+        });
+}
+render () {
+    return (
         <div>
         <Navbar/>
         <div style={style.home}>
-        
+
+
+        <input type="button"
+            onClick={this.showModal}
+            value="Show Modal" />
+        <Modal
+         onClose={this.showModal}
+         show={this.state.show}>
+             This message is from Modal!
+         </Modal>
+
+         
         <div className="row" style={style.row1}></div>
 
         <div className="row">
@@ -86,6 +115,7 @@ const Home = () => (
         </div>
         </div>
         </div>
-)
+    )};
+    }
 
 export default Home;
