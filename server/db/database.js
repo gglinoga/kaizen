@@ -12,19 +12,32 @@ const knex = require('knex')(options);
 
 console.log('knex connected');
 
-createCourses = () => {
-    knex.schema.dropTable('lessons').then();
-    knex.schema.dropTable('courses').then();
+dropTables = () => {
+    knex.schema.hasTable('lessons').then(
+        knex.schema.dropTable('lessons').then(() => {
+            console.log('dropped lessons');
+        }));
+    knex.schema.hasTable('courses').then(
+        knex.schema.dropTable('courses').then(() => {
+            console.log('dropped courses');
+        }));
+    knex.schema.hasTable('users').then(
+        knex.schema.dropTable('users').then(() => {
+            console.log('dropped users');
+        }));
+}
 
+createCourses = () => {
     knex.schema.createTable('courses', table => {
         table.increments('id').primary().notNullable();
         table.string('courseName').notNullable();
+        table.unique('courseName');
         table.text('coursePic');
     }).then((response, err) => {
         if (err) throw err;
         createLessons();
     }).finally()
-        // console.log('made courses table'));
+    // console.log('made courses table'));
 }
 
 createLessons = () => {
@@ -40,35 +53,33 @@ createLessons = () => {
         table.text('lessonDescription').notNullable();
     }).then((response, err) => {
         if (err) throw err;
-        // console.log(response);
+        createUsers();
     }).finally()
-        // console.log('made lessons table'));
 }
 
-// createCourses();
+createUsers = () => {
+    knex.schema.createTable('users', table => {
+        table.increments();
+        table.string('userName').notNullable();
+        table.unique('userName')
+        table.string('email').notNullable();
+        table.unique('email');
+        table.string('password').notNullable();
+        table.json('currentLessons');
+    }).then((response, err) => {
+        if (err) throw err;
+    }).finally()
+}
+let start = (err) => {
+    dropTables();
+    if (err) {
+        console.log(err)
+    } else {
+        ;
+        createCourses();
+    }
+}
 
-// knex.schema.createTable('test', table => {
-//     console.log('make table');
-//     table.increments('id')
-//     table.string('name');
-// }).then(function (response, err) {
-//     if (err) throw err;
-//     console.log(response);
-// }).finally(() => {
-//     console.log('made table');
-// })
+start();
 
 module.exports = knex;
-
-
-
-// knex.select('*').from('courses').join('lessons', {
-//         'courses.id': "lessons.course_id"
-//     })
-//     .then(function (response, err) {
-//         if (err) throw err;
-//         console.log(response);
-//     }).finally(() => {
-//         console.log("done");
-//         // knex.destroy();
-//     })
