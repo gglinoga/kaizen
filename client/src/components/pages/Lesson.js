@@ -25,7 +25,7 @@ const style = {
 
     lessonChange: {
         display: "none"
-},
+    },
     border: {
         backgroundColor: "silver"
     }
@@ -72,11 +72,11 @@ class Lesson extends Component {
             <div>
                 <Navbar courseTitle={this.state.courseName} />
                 <div class="container">
-                <Sidenav />
+                    <Sidenav />
                     <div className="row">
                         <div className="col-2"></div>
                         <div className="col-8" style={style.content}>
-                        <div className="row" style={style.row1}></div>
+                            <div className="row" style={style.row1}></div>
                             <Learning
                                 courseName={this.state.lessonNames[this.state.i]}
                                 lessonPic={this.state.lessonPic[this.state.i]}
@@ -90,6 +90,7 @@ class Lesson extends Component {
 
                     </div>
                 </div>
+            </div>
         )
     }
 }
