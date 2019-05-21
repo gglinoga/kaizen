@@ -34,10 +34,6 @@ const style = {
         justifyContent: "center",
     },
 
-    modal: {
-
-    }
-
 }
 class Home extends Component {
     state = {
@@ -67,10 +63,10 @@ render () {
     return(
         <div>
         <Navbar/>
-            <Modal style={style.modal}
+            <Modal
                 onClose={this.showModal}
                 show={this.state.show}>
-                </Modal>
+            </Modal>
 
         <div style={style.home}>
         <div className="row">
