@@ -1,18 +1,23 @@
-import React from "react";
+import React, {Component} from "react";
 import Course from "../Course/Course.js";
 import Navbar from "../Navbar/Navbar";
+import Modal from "../Modal/Modal";
 
 const style = {
 
     home: {
         backgroundColor: "silver",
-        height: "auto"
+        height: "auto",
+        width: "100%",
+        position: "absolute",
+        zIndex: -1
     },
 
     content: {
         backgroundColor: "white",
         padding: "20px 30px 500px 30px",
-        height: "100%"
+        height: "auto",
+        align: "center",
 
     },
 
@@ -22,17 +27,51 @@ const style = {
         backgroundColor: "white",
         textAlign: "center",
         overflow: "auto",
-        padding: "20px"
+        padding: "20px",
     },
 
     course: {
-        justifyContent: "center"
+        justifyContent: "center",
     },
+
+    modal: {
+
+    }
+
+}
+class Home extends Component {
+    state = {
+        show: false,
+        modalOn: false
+    }
+    showModal = () => {
+        console.log("click!");
+        this.setState({
+            ...this.state,
+            show: !this.state.show
+        });
 }
 
-const Home = () => (
+loginEvent = (e) => {
+    e.preventDefault();
+    console.log(this.state.modalOn);
+    console.log("test LoginEvent");
+    if (this.state.show === false) {
+        console.log(this.state.modalOn);
+        this.showModal()
+    };
+
+}
+
+render () {
+    return(
         <div>
         <Navbar/>
+            <Modal style={style.modal}
+                onClose={this.showModal}
+                show={this.state.show}>
+                </Modal>
+
         <div style={style.home}>
         <div className="row">
             <div className="col-2"></div>
@@ -45,21 +84,23 @@ const Home = () => (
                 </div>
                 <div className="row">
                     <div className="col-12 d-flex flex-wrap" style={style.course}>
-                <a href="/lesson">
+
+                <a onClick={this.loginEvent}>
                 <Course style={style.course} course=
-                    {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
+                    {{ title: "Javascript",
+                    backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')",
+                    description: "JS Description", numLessons: "10" }}
                 />
-                </a>
-                <a href="/lesson">
+
                 <Course course=
                     {{ title: "React", description: "React Description", numLessons: "10" }}
                 />
-                </a>
-                <a href="/lesson">
+
                 <Course course=
                     {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
                 />
                 </a>
+
                 </div>
             </div>
             </div>
@@ -67,5 +108,7 @@ const Home = () => (
         </div>
         </div>
 )
+    }
+}
 
 export default Home;
