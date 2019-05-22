@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Login from "../Login/Login"
 
-
 //gray background
 const backdropStyle  = {
     position: "fixed",
@@ -11,7 +10,8 @@ const backdropStyle  = {
     left: 0,
     right: 0,
     backgroundColor: "rgba(0,0,0,0.3)",
-    padding: 50
+    padding: 50,
+    overflowY: "auto"
 }
 
 const modalStyle = {
@@ -26,13 +26,13 @@ const modalStyle = {
 }
 
 const footerStyle = {
-    position: "absolute",
     bottom: 20,
+    align: "right"
     
 }
 
 export default class Modal extends React.Component {
-    
+
     onClose = (e) => {
         console.log("close");
         this.props.onClose && this.props.onClose(e);
@@ -46,8 +46,9 @@ export default class Modal extends React.Component {
         return (
             <div style={backdropStyle}>
                 <div style={modalStyle}>
-                {this.props.children}
                 <Login/>
+                {this.props.children}
+                <br></br>
                 <div style={footerStyle}>
                     <button onClick={(e) => {this.onClose(e)}}>
                         Close

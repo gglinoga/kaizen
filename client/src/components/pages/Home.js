@@ -18,7 +18,6 @@ const style = {
         padding: "20px 30px 500px 30px",
         height: "auto",
         align: "center",
-
     },
 
     description: {
