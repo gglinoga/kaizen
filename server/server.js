@@ -7,15 +7,9 @@ const app = express();
 var bodyParser = require('body-parser')
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
-
-// parse application/json
-app.use(bodyParser.json())
-
-var bodyParser = require('body-parser')
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -30,7 +24,7 @@ app.get('/api/lessons', (req, res) => {
     knex.select().from('lessons')
         .then(function (response, err) {
             if (err) throw err;
-            console.log(response);
+            console.log(response); 
             res.json(response)
         }).finally(() => {
             console.log('done');
@@ -92,16 +86,16 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
         });
 })
 
-
 app.get('/users/login', (req, res) => {
     console.log('login')
     knex.select().from('users').where({
-        email: req.body.email,
-        password: req.body.password
+        email: req.params.email,
+        password: req.params.password
     })
         .then(function (response, err) {
             if (err) throw err;
             console.log(response);
+            res.json(response)
             if (!response) {
                 console.log("no record")
             }
@@ -125,7 +119,6 @@ app.post('/users/register', (req, res) => {
         email: req.body.email,
         password: req.body.password
 
-
     }).then((response, err) => {
         console.log(req.body)
         if (err) throw err;
@@ -133,3 +126,12 @@ app.post('/users/register', (req, res) => {
         res.json(req.body);
     })
 });
+
+// app.post('/users/login', (req, res) => {
+//     console.log(req.body);
+//     console.log('login');
+// }).then((response, err) => {
+//     if (err) throw err;
+//     console.log(response);
+//     res.json(response)
+// })
