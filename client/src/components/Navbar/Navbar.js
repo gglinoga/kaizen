@@ -1,4 +1,5 @@
-import React from "react";
+import React, {Component} from "react";
+import Modal from "../Modal/Modal";
 
 const navStyle = {
     backgroundImage: "linear-gradient(to right, blue, purple)",
@@ -35,7 +36,38 @@ const navRight = {
 
 }
 
-const Navbar = props => (
+class Navbar extends Component {
+
+    state = {
+        show: false,
+        modalOn: false
+    }
+
+    showModal = () => {
+        console.log("click!");
+        this.setState({
+            ...this.state,
+            show: !this.state.show
+        });
+}
+
+loginEvent = (e) => {
+    e.preventDefault();
+    console.log(this.state.modalOn);
+    console.log("test LoginEvent");
+    if (this.state.show === false) {
+        console.log(this.state.modalOn);
+        this.showModal()
+    };
+}
+
+render () {
+    return(
+        <div>
+         <Modal
+                onClose={this.showModal}
+                show={this.state.show}>
+                </Modal>
         <nav class="home">
         <div class="row" style={navStyle}>
         <div class="col-4" style={navLeft}>
@@ -45,12 +77,16 @@ const Navbar = props => (
                 <h2>kaizen</h2>
         </div>
         <div class="col-4" style={navRight}>
-            <a href="#" style={a}>login    </a>
+            <a onClick={this.loginEvent} style={a} >login    </a>
             <a style={a}>|</a>
             <a href="#" style={a}>     user    </a>
         </div>
         </div>
         </nav>
-);
+        </div>
+)
+    }
+
+}
 
 export default Navbar;

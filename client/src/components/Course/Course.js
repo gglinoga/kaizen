@@ -18,9 +18,8 @@ const style = {
 
 const Course = props => (
     <MDBContainer>
-
     <div class="container">
-    <div style={style.card}>
+    <div style={style.card} onClick={props.loginEvent}>
             <p>{props.course.title}</p>
             {/* <p>Description: {props.course.description}</p> */}
             {/* <p>Number of Lessons: {props.course.numLessons}</p> */}
