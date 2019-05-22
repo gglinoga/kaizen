@@ -12,6 +12,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse application/json
 app.use(bodyParser.json())
 
+var bodyParser = require('body-parser')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// parse application/json
+app.use(bodyParser.json())
+
 app.listen(PORT, () => {
     console.log("app listening on PORT " + PORT);
 });
@@ -84,6 +92,29 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
         });
 })
 
+
+app.get('/users/login', (req, res) => {
+    console.log('login')
+    knex.select().from('users').where({
+        email: req.body.email,
+        password: req.body.password
+    })
+        .then(function (response, err) {
+            if (err) throw err;
+            console.log(response);
+            if (!response) {
+                console.log("no record")
+            }
+            else {
+                console.log(response)
+            }
+            res.json(response)
+        }).finally(() => {
+            console.log('done');
+        })
+}
+)
+
 app.post('/users/register', (req, res) => {
     console.log('register');
     knex('users').insert({
@@ -91,10 +122,8 @@ app.post('/users/register', (req, res) => {
         // email: 'gglinoga@gmail.com',
         // password: 'req.body.password'
 
-        userName: req.body.userName,
         email: req.body.email,
         password: req.body.password
-
 
 
     }).then((response, err) => {
@@ -104,12 +133,3 @@ app.post('/users/register', (req, res) => {
         res.json(req.body);
     })
 });
-
-// app.post('/users/login', (req, res) => {
-//     console.log(req.body);
-//     console.log('login');
-// }).then((response, err) => {
-//     if (err) throw err;
-//     console.log(response);
-//     res.json(response)
-// })
