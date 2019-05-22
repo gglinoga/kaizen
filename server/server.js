@@ -2,10 +2,15 @@ const knex = require('./db/database');
 const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
-// app.use('/api', require('./routes/routes'));
 
-// require('./routes/course-routes');
-// require('./routes/lesson-routes');
+
+var bodyParser = require('body-parser')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 var bodyParser = require('body-parser')
 
@@ -18,7 +23,6 @@ app.use(bodyParser.json())
 app.listen(PORT, () => {
     console.log("app listening on PORT " + PORT);
 });
-
 
 app.get('/api/lessons', (req, res) => {
     //find all query
@@ -88,6 +92,7 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
         });
 })
 
+
 app.get('/users/login', (req, res) => {
     console.log('login')
     knex.select().from('users').where({
@@ -120,6 +125,7 @@ app.post('/users/register', (req, res) => {
         email: req.body.email,
         password: req.body.password
 
+
     }).then((response, err) => {
         console.log(req.body)
         if (err) throw err;
@@ -127,4 +133,3 @@ app.post('/users/register', (req, res) => {
         res.json(req.body);
     })
 });
-
