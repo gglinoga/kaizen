@@ -3,7 +3,12 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const bcrypt = require('bcrypt');
+const session = require("express-session");
+const passport = require('passport');
 
+
+//Passport config
+const blah = require('./config/passport.js')(passport);
 
 var bodyParser = require('body-parser')
 
@@ -19,6 +24,17 @@ app.listen(PORT, () => {
     console.log("app listening on PORT " + PORT);
 });
 
+//Express Session
+app.use(session({
+    secret: 'yr6thKLMtwae4minghr9emijoaeghmu0',
+    resave: true,
+    saveUnitiatlized: true
+}));
+
+//Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.get('/api/lessons', (req, res) => {
     //find all query
     console.log('get all lessons')
@@ -28,7 +44,7 @@ app.get('/api/lessons', (req, res) => {
             console.log(response); 
             res.json(response)
         }).finally(() => {
-            console.log('done');
+            // console.log('done');
             // knex.destroy();
         })
 })
@@ -88,6 +104,7 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
 })
 
 app.get('/users/login', (req, res) => {
+    console.log("server-login")
     knex.select().from('users').where({
         email: req.body.email,
         password: req.body.password
@@ -132,11 +149,16 @@ app.post('/users/register', (req, res) => {
 )
     
 
-// app.post('/users/login', (req, res) => {
-//     console.log(req.body);
-//     console.log('login');
-// }).then((response, err) => {
-//     if (err) throw err;
-//     console.log(response);
-//     res.json(response)
-// })
+app.post('/users/login', (req, res) => {
+    passport.authenticate('local', function(err, email, info) {
+        if (err) return (err);
+        // if (!email) {
+        //     console.log("user not found");
+        // }
+        req.logIn(email, function(err) {
+            if (err) return (err);
+            console.log("success");
+        });
+    })(req, res);
+
+});

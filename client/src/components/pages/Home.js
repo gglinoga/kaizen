@@ -85,7 +85,6 @@ class Home extends Component {
             .then(res => {
                 // res.json(data),
                 let foo = res.json();
-
                 foo.then(json => {
                     console.log(json);
                     // console.log(json[0].lessonMaterial)

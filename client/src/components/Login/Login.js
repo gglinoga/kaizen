@@ -53,11 +53,27 @@ handleInputChange = event => {
 				("Fill out your password please or we will feed you to Drogon!")
 			)
     }
-    // this.setState({
-    //   email: "",
-    //   password: ""
-    // });
+    this.loginUser();
 	};
+
+	loginUser(req) {
+		console.log('loginuser')
+
+		fetch("/users/login", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: this.state.loginemail,
+				password: this.state.password
+			})
+		})
+		.catch(error => {
+			if (error) throw error
+		});
+	}
 	
 	handleRegisterSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
