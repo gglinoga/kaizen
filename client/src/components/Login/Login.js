@@ -93,12 +93,6 @@ handleInputChange = event => {
 				password: this.state.password
 			})
 		})
-		// .then(res => {
-			// let foo = res.json();
-			// foo.then(json => {
-		// 		console.log(json);
-		// 	})
-		// })
 		.catch(error => {
 			if (error) throw error
 		});
@@ -118,7 +112,7 @@ handleInputChange = event => {
 										<div className="form-group">
 											<label for="email">Email</label>
 											<input
-												type="loginemail"
+												type="email"
 												id="loginemail"
 												name="loginemail"
 												class="form-control"
@@ -131,7 +125,7 @@ handleInputChange = event => {
 										<div className="form-group">
 											<label for="password">Password</label>
 											<input
-												type="loginpassword"
+												type="password"
 												id="loginpassword"
 												name="loginpassword"
 												class="form-control"
@@ -162,7 +156,7 @@ handleInputChange = event => {
 							<div className="form-group">
 								<label for="email">Email</label>
 								<input
-									type="registeremail"
+									type="email"
 									id="registeremail"
 									name="registeremail"
 									class="form-control"
