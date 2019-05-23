@@ -43,7 +43,7 @@ class Home extends Component {
         show: false,
         modalOn: false,
         apiResponse: "",
-        blah: "blah"
+        courseArray: [],
 
     }
     showModal = () => {
@@ -75,7 +75,7 @@ class Home extends Component {
     // }
     callAPI(data) {
         console.log('callAPI')
-        fetch("/api/lessons", {
+        fetch("/api/courses", {
                 method: 'GET',
                 // body: JSON.stringify(data),
                 // headers: {
@@ -88,6 +88,8 @@ class Home extends Component {
 
                 foo.then(json => {
                     console.log(json);
+                    this.setState({ courseArray: json})
+                    console.log(this.state.courseArray)
                     // console.log(json[0].lessonMaterial)
                 })
                 // console.log(res.json());
@@ -105,63 +107,59 @@ class Home extends Component {
     }
 
 
+
+
+
     render() {
-        return ( <
-            div >
+        return ( <div>
             <
             Navbar / >
-            <
-            Modal onClose = {
+            <Modal onClose = {
                 this.showModal
             }
             show = {
                 this.state.show
             } >
-            <
-            /Modal>
+            </Modal>
 
-            <
-            div style = {
+            <div style = {
                 style.home
             } >
-            <
-            div className = "row" >
-            <
-            div className = "col-2" >
-            <
-            h1 > TEST {
-                this.state.apiResponse
-            } < /h1> <
-            /div> <
-            div className = "col-8"
+            <div className = "row" >
+            <div className = "col-2" >
+            </div> <div className = "col-8"
             style = {
                 style.content
             } >
-            <
-            div className = "row"
+            <div className = "row"
             style = {
                 style.description
             } >
-            <
-            div className = "col-12" >
-            <
-            h2 > Learning is fun < /h2> <
-            h5 > Qui consectetur amet mollit culpa laborum nulla aute ullamco aliquip sit veniam. < /h5> <
-            /div> <
-            /div> <
-            div className = "row" >
-            <
-            div className = "col-12 d-flex flex-wrap"
+            <div className = "col-12" >
+            <h2> Learning is fun </h2> 
+            <h5> Qui consectetur amet mollit culpa laborum nulla aute ullamco aliquip sit veniam. </h5> </div> 
+            </div> 
+            <div className = "row">
+            <div className = "col-12 d-flex flex-wrap"
             style = {
                 style.course
             } >
 
-            <
-            a onClick = {
+            <a onClick = {
                 this.loginEvent
             } >
-            <
-            Course style = {
+
+{this.state.courseArray.map(course => (
+                                        <Course
+                                            id={course.id}
+                                            title={course.courseName}
+                                            // description={course.description}
+                                            // numLessons={course.material.length}
+                                        />
+                                    ))}
+
+
+            {/* <Course style = {
                 style.course
             }
             course = {
@@ -174,8 +172,7 @@ class Home extends Component {
             }
             />
 
-            <
-            Course course = {
+            <Course course = {
                 {
                     title: "React",
                     description: "React Description",
@@ -184,24 +181,22 @@ class Home extends Component {
             }
             />
 
-            <
-            Course course = {
+            <Course course = {
                 {
                     title: "HTML & CSS",
                     description: "HTML & CSS Description",
                     numLessons: "10"
                 }
-            }
-            /> <
-            /a>
+            } */}
+            {/* /> */}
+             </a>
 
-            <
-            /div> <
-            /div> <
-            /div> <
-            /div> <
-            /div> <
-            /div>
+            </div> 
+            </div> 
+            </div> 
+            </div> 
+            </div> 
+            </div>
         )
     }
 }
