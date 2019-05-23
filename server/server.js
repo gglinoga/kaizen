@@ -2,6 +2,7 @@ const knex = require('./db/database');
 const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
+const bcrypt = require('bcrypt');
 
 
 var bodyParser = require('body-parser')
@@ -87,8 +88,6 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
 })
 
 app.get('/users/login', (req, res) => {
-    console.log('login')
-    console.log(req.body)
     knex.select().from('users').where({
         email: req.body.email,
         password: req.body.password
@@ -111,19 +110,27 @@ app.get('/users/login', (req, res) => {
 )
 
 app.post('/users/register', (req, res) => {
-    console.log(req)
-    console.log("register")
-    knex('users').insert({
 
-        email: req.body.email,
-        password: req.body.password
-
-    }).then((response, err) => {
-        if (err) throw err;
-        console.log(response);
-        res.json(req.body);
-    })
-});
+    bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+            if(err) throw err;   
+            
+            console.log(req)
+            console.log("register")
+            knex('users').insert({
+        
+                email: req.body.email,
+                password: hash
+        
+            }).then((response, err) => {
+                if (err) throw err;
+                console.log(response);
+                res.json(req.body);
+            })
+        })
+    )}
+)
+    
 
 // app.post('/users/login', (req, res) => {
 //     console.log(req.body);

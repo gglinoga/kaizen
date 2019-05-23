@@ -38,6 +38,7 @@ const style = {
 }
 
 class Home extends Component {
+    
     state = {
         show: false,
         modalOn: false,
@@ -87,7 +88,7 @@ class Home extends Component {
 
                 foo.then(json => {
                     console.log(json);
-                    console.log(json[0].lessonMaterial)
+                    // console.log(json[0].lessonMaterial)
                 })
                 // console.log(res.json());
 

@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import logo from "../../images/logo.png";
 
 const style = {
@@ -22,8 +22,11 @@ const style = {
 class Login extends Component {
 	  // Setting the component's initial state
 	  state = {
-		email: "",
-		password: ""
+		loginemail: "",
+		loginpassword: "",
+		registeremail: "",
+		password: "",
+		confirmpassword: ""
 	  };
 
 handleInputChange = event => {
@@ -40,24 +43,66 @@ handleInputChange = event => {
     });
   };
 
-  handleFormSubmit = event => {
+  handleLoginSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
-    if (!this.state.email) {
-      alert("Fill out your name and email please or we will feed you to Drogon!");
-    } else if (this.state.password.length < 6) {
+    if (!this.state.loginemail) {
+      alert("Fill out your email please or we will feed you to Drogon!");
+    } else if (!this.state.loginpassword) {
       alert(
-        `Choose a more secure password ${this.state.email}`
-      );
-    } else {
-      alert(`Hello ${this.state.email}`);
+				("Fill out your password please or we will feed you to Drogon!")
+			)
     }
-
     // this.setState({
     //   email: "",
     //   password: ""
     // });
-  };
+	};
+	
+	handleRegisterSubmit = event => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    event.preventDefault();
+    if (!this.state.registeremail) {
+      alert("Fill out your email please or we will feed you to Drogon!");
+    } else if (this.state.password.length < 6) {
+      alert(
+        `Choose a more secure password`
+      );
+		} else if (this.state.password !== this.state.confirmpassword) {
+			alert(
+				`Your passwords do not match`
+			);
+		}
+		else {
+			alert(`Hello ${this.state.registeremail}, You are registered!`);
+			this.registerUser();
+		}
+	};
+	
+	registerUser(req) {
+		console.log('register-client')
+
+		fetch("/users/register", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: this.state.registeremail,
+				password: this.state.password
+			})
+		})
+		// .then(res => {
+			// let foo = res.json();
+			// foo.then(json => {
+		// 		console.log(json);
+		// 	})
+		// })
+		.catch(error => {
+			if (error) throw error
+		});
+	}
 
 
   render() {
@@ -73,12 +118,12 @@ handleInputChange = event => {
 										<div className="form-group">
 											<label for="email">Email</label>
 											<input
-												type="email"
-												id="email"
-												name="email"
+												type="loginemail"
+												id="loginemail"
+												name="loginemail"
 												class="form-control"
 												placeholder="Enter Email"
-												value={this.state.email}
+												value={this.state.loginemail}
 												onChange={this.handleInputChange}>
 											</input>
 										</div>
@@ -86,18 +131,18 @@ handleInputChange = event => {
 										<div className="form-group">
 											<label for="password">Password</label>
 											<input
-												type="password"
-												id="password"
-												name="password"
+												type="loginpassword"
+												id="loginpassword"
+												name="loginpassword"
 												class="form-control"
 												placeholder="Password"
-												value={this.state.password}
+												value={this.state.loginpassword}
 												onChange={this.handleInputChange}>
 											</input>
 										</div>
 
 										<br></br>
-										<input type="submit" onClick={this.handleFormSubmit} value="Login" />
+										<input type="submit" onClick={this.handleLoginSubmit} value="Login" />
 
 
 
@@ -117,13 +162,14 @@ handleInputChange = event => {
 							<div className="form-group">
 								<label for="email">Email</label>
 								<input
-									type="email"
-									id="email"
-									name="email"
+									type="registeremail"
+									id="registeremail"
+									name="registeremail"
 									class="form-control"
 									placeholder="Enter Email"
-									value="">
-								</input>
+									value={this.state.registeremail}
+									onChange={this.handleInputChange}>
+					</input>
 							</div>
 
 							<div className="form-group">
@@ -134,25 +180,27 @@ handleInputChange = event => {
 									name="password"
 									class="form-control"
 									placeholder="Password"
-									value="">
+									value={this.state.password}
+									onChange={this.handleInputChange}>
 								</input>
 							</div>
 
 							<div className="form-group">
-								<label for="confirmpassword">Confirm Password</label>
+								<label for="Confirm Password">Confirm Password</label>
 								<input
-									type="confirmpassword"
+									type="password"
 									id="confirmpassword"
 									name="confirmpassword"
 									class="form-control"
-									placeholder="confirmpassword"
-									value="">
+									placeholder="Confirm Password"
+									value={this.state.confirmpassword}
+									onChange={this.handleInputChange}>
 								</input>
 							</div>
 
 							<br></br>
 
-							<input type="submit" value="Register" />
+							<input type="submit" onClick={this.handleRegisterSubmit} value="Register" />
 
 							<br></br>
 					</form>
