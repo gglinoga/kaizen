@@ -2,8 +2,8 @@ const options = {
     client: "mysql2",
     connection: {
         host: 'localhost',
-        user: 'user',
-        password: 'password',
+        user: 'admin',
+        password: 'asdfasdf',
         database: 'kaizen_db'
     }
 };
@@ -60,8 +60,8 @@ createLessons = () => {
 createUsers = () => {
     knex.schema.createTable('users', table => {
         table.increments();
-        table.string('userName');
-        table.unique('userName')
+        // table.string('userName');
+        // table.unique('userName')
         table.string('email');
         table.unique('email');
         table.string('password');
@@ -80,6 +80,6 @@ let start = (err) => {
     }
 }
 
-start();
+// start();
 
 module.exports = knex;

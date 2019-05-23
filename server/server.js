@@ -88,9 +88,10 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
 
 app.get('/users/login', (req, res) => {
     console.log('login')
+    console.log(req.body)
     knex.select().from('users').where({
-        email: req.params.email,
-        password: req.params.password
+        email: req.body.email,
+        password: req.body.password
     })
         .then(function (response, err) {
             if (err) throw err;
@@ -110,17 +111,14 @@ app.get('/users/login', (req, res) => {
 )
 
 app.post('/users/register', (req, res) => {
-    console.log('register');
+    console.log(req)
+    console.log("register")
     knex('users').insert({
-        // userName: 'greg',
-        // email: 'gglinoga@gmail.com',
-        // password: 'req.body.password'
 
         email: req.body.email,
         password: req.body.password
 
     }).then((response, err) => {
-        console.log(req.body)
         if (err) throw err;
         console.log(response);
         res.json(req.body);
