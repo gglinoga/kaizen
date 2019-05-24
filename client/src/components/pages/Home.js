@@ -44,7 +44,9 @@ class Home extends Component {
     showModal = () => {
         this.setState({
             ...this.state,
-            show: !this.state.show
+            show: !this.state.show,
+            login: true
+
         });
     }
 
@@ -67,6 +69,9 @@ class Home extends Component {
 
         if (!this.state.login) {
             this.showModal()
+        }
+        else if (this.state.login) {
+        window.location.replace('/lesson');
         }
     }
 
@@ -130,7 +135,7 @@ class Home extends Component {
                                 <div className="col-12">
                                     <div className="d-flex flex-wrap justify-content-center">
 
-                                        <a onClick={this.loginEvent}>
+                                        {/* <a onClick={this.loginEvent}> */}
 
                                             {/* Hardcorded Courses
                 <Course course=
@@ -154,6 +159,7 @@ class Home extends Component {
                                                         <Course
                                                             id={course.id}
                                                             title={course.courseName}
+                                                            handleClick={this.handleClick}
                                                         // description={course.description}
                                                         // numLessons={course.material.length}
                                                         />
@@ -161,7 +167,7 @@ class Home extends Component {
 
                                                 </tr>
                                             </table>
-                                    </a>
+                                    {/* </a> */}
                                 </div>
 
                             </div>

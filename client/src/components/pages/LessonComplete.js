@@ -43,6 +43,28 @@ class Lesson extends Component {
         console.log('mount');
     }
 
+    handleClick = (id) => {
+        console.log(id);
+        fetch("/users/currentCourse", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                currentCourse: id,
+                currentLessons: id
+            })
+        })
+            .catch(error => {
+                if (error) throw error
+            });
+
+      
+        window.location.replace('/lesson');
+        
+    }
+
 
     render() {
         return (
@@ -56,6 +78,7 @@ class Lesson extends Component {
     <Course
         id={course.id}
         title={course.courseName}
+        handleClick={this.handleClick}
         // description={course.description}
         // numLessons={course.material.length}
     />

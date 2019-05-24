@@ -39,19 +39,27 @@ class Lesson extends Component {
         courseID: "",
         i: 0,
         courseName: "",
-        lessonNames: [],
+        lessonNames: "",
         lessonMaterial: [],
-        quizzes: []
+        lessonPic: "",
+        answer: "",
+        choices: [],
+        question: "",
+        jsonS: {},
+        load: false,
+        lessonCount: ""
     };
 
 
     updateLesson = () => {
-        if (this.state.i < this.state.lessonNames.length - 1) {
+        if (this.state.i < this.state.lessonCount - 1) {
             this.setState({ i: this.state.i + 1 }, () => {
+                this.getLesson();
                 console.log(this.state)
                 document.getElementById("nextPage").style.display = "none"; // no
             });
         }
+        else{window.location.href="/LessonComplete"}
     };
 
     callAPI = () => {
@@ -70,10 +78,6 @@ class Lesson extends Component {
     }
 
 // If getLesson is getting the json data from the table like intend, we setState.
-// this.setState({courseName: json[courseID].courseName}) <----might not need this one if we don't want to display name
-// this.setState({lessonNames: json[courseID].lessonNames})
-// this.setState({lessonMaterial: json[courseID].lessonMaterial})
-// this.setState({quizzes: json[courseID].quizzes})
 
 
     getLesson= () => {
@@ -90,9 +94,24 @@ class Lesson extends Component {
         }).then( (res) => {
             console.log(this.state.courseID);
             let foo = res.json();
-            foo.then(json => {
+            foo.then( (json)=> {
                 console.log(json);
+                console.log(json[0].courseName)
+
+                this.setState({courseName: json[this.state.i].courseName}) 
+                this.setState({lessonNames: json[this.state.i].lessonMaterial})
+                this.setState({lessonMaterial: json[this.state.i].textContent})
+                this.setState(({answer: json[this.state.i].quiz.answer}))
+                this.setState(({choices: json[this.state.i].quiz.choices}))
+                this.setState(({question: json[this.state.i].quiz.question}))
+                this.setState({lessonPic: json[this.state.i].lessonPic})
+                let length = json.length
+                console.log(length)
+                this.setState({lessonCount: length})
+                console.log(this.state.lessonCount)
+
                     })
+            
         })   
         .catch(error => {
             if (error) throw error
@@ -102,13 +121,18 @@ class Lesson extends Component {
     componentWillMount () {
         this.callAPI()
     }
+    componentDidMount() {
+    }
     componentDidUpdate() {
+        if (!this.state.load){
+        this.setState({load: true})
         this.getLesson();
+}
     }
 
 
     render() {
-        console.log(this.state.quizzes[this.state.i].choices)
+        // console.log(this.state.quizzes[this.state.i].choices)
         return (
             <div>
                 <Navbar courseTitle={this.state.courseName} />
@@ -119,12 +143,12 @@ class Lesson extends Component {
                         <div className="col-8" style={style.content}>
                             <div className="row" style={style.row1}></div>
                             <Learning
-                                courseName={this.state.lessonNames[this.state.i]}
-                                lessonPic={this.state.lessonPic[this.state.i]}
-                                lessonMaterial={this.state.lessonMaterial[this.state.i]}
-                                quizQuestion={this.state.quizzes[this.state.i].question}
-                                correctAnswer={this.state.quizzes[this.state.i].correctAnswer}
-                                choices={this.state.quizzes[this.state.i].choices}
+                                courseName={this.state.lessonNames}
+                                lessonPic={this.state.lessonPic}
+                                lessonMaterial={this.state.lessonMaterial}
+                                quizQuestion={this.state.question}
+                                correctAnswer={this.state.answer}
+                                choices={this.state.choices}
                             >
                             </Learning>
                             <button id="nextPage" onClick={this.updateLesson} style={style.lessonChange}>Next Page</button></div>
