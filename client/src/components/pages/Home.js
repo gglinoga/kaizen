@@ -44,7 +44,8 @@ class Home extends Component {
     showModal = () => {
         this.setState({
             ...this.state,
-            show: !this.state.show
+            show: !this.state.show,
+            login: true
         });
     }
 
@@ -58,21 +59,26 @@ class Home extends Component {
             },
             body: JSON.stringify({
                 currentCourse: id,
-                currentLessons: id
             })
         })
             .catch(error => {
                 if (error) throw error
             });
 
-        if (!this.state.login) {
+        if (this.state.login===false) {
+            this.setState({login: true})
+            console.log(this.state.login);
             this.showModal()
+        }
+        else {
+                //redirect here
+                console.log('redirect');
+                window.location.replace("./lesson");
         }
     }
 
     loginEvent = (e) => {
         e.preventDefault();
-        console.log('test');
         if (this.state.show === false) {
             console.log(this.state.modalOn);
             this.showModal()
@@ -80,7 +86,7 @@ class Home extends Component {
 
     }
 
-    callAPI(data) {
+    callAPI() {
         console.log('callAPI')
         fetch("/api/courses", {
             method: 'GET',
@@ -130,7 +136,7 @@ class Home extends Component {
                                 <div className="col-12">
                                     <div className="d-flex flex-wrap justify-content-center">
 
-                                        <a onClick={this.loginEvent}>
+                                        {/* <a onClick={this.loginEvent}> */}
 
                                             {/* Hardcorded Courses
                 <Course course=
@@ -154,6 +160,7 @@ class Home extends Component {
                                                         <Course
                                                             id={course.id}
                                                             title={course.courseName}
+                                                            handleClick={this.handleClick}
                                                         // description={course.description}
                                                         // numLessons={course.material.length}
                                                         />
@@ -161,7 +168,7 @@ class Home extends Component {
 
                                                 </tr>
                                             </table>
-                                    </a>
+                                    {/* </a> */}
                                 </div>
 
                             </div>
