@@ -64,16 +64,14 @@ class Learning extends Component {
                     <div className="courseName" style={style.courseName}>{this.props.courseName}</div>
                 </div>
                 <div className="row">
-                    <div className="col-6">
-                        <p className="lessonMaterial" style={style.lessonMaterial}>{this.props.lessonMaterial}</p>
-                    </div>
-                    <div className="col-6">
-                        <img className="lessonPic" style={style.img} src={this.props.lessonPic} alt=""></img>
+                    <div className="col-12">
+                    <img className="lessonPic" style={style.img} src={this.props.lessonPic} alt=""></img>
+                        <div className="lessonMaterial" style={style.lessonMaterial}>{this.props.lessonMaterial}</div>
                     </div>
                 </div>
-                <hr></hr>
+                <br></br>
                 <div className="row">
-                    <div className="col">
+                    <div className="col" style={style.quiz}>
 
                             <h4>Quiz</h4>
                             <p><b>{this.props.quizQuestion}</b></p>
