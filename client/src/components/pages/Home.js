@@ -44,27 +44,47 @@ class Home extends Component {
         modalOn: false,
         apiResponse: "",
         courseArray: [],
+        login: false
 
     }
     showModal = () => {
-        console.log("click!");
         this.setState({
             ...this.state,
             show: !this.state.show
         });
     }
 
+    handleClick = (id) => {
+        console.log(id);
+        fetch("/users/currentCourse", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+                currentCourse: id,
+                currentLessons: id
+			})
+		})
+		.catch(error => {
+			if (error) throw error
+		});
+
+        if (!this.state.login) {
+            this.showModal()
+        }
+    }
+    
     loginEvent = (e) => {
         e.preventDefault();
-        console.log(this.state.modalOn);
-        console.log("test LoginEvent");
+        console.log('test');
         if (this.state.show === false) {
             console.log(this.state.modalOn);
             this.showModal()
         };
 
     }
-
 
     // callAPI(data){
     //     fetch('/api/lessons', {method: 'GET', body: JSON.stringify(data),
@@ -77,25 +97,16 @@ class Home extends Component {
         console.log('callAPI')
         fetch("/api/courses", {
                 method: 'GET',
-                // body: JSON.stringify(data),
-                // headers: {
-                //     'Content-Type': 'application/json',
-                // },
             })
             .then(res => {
-                // res.json(data),
                 let foo = res.json();
-
                 foo.then(json => {
                     console.log(json);
                     this.setState({ courseArray: json})
                     console.log(this.state.courseArray)
-                    // console.log(json[0].lessonMaterial)
                 })
-                // console.log(res.json());
 
             })
-            // .then(res => this.setState({ apiResponse: res.body.lessonMaterial }))
             .catch(error => {
                 if (error) throw error
             });
@@ -145,14 +156,15 @@ class Home extends Component {
                 style.course
             } >
 
-            <a onClick = {
+            {/* <a onClick = {
                 this.loginEvent
-            } >
+            } > */}
 
 {this.state.courseArray.map(course => (
                                         <Course
                                             id={course.id}
                                             title={course.courseName}
+                                            handleClick={this.handleClick}
                                             // description={course.description}
                                             // numLessons={course.material.length}
                                         />
@@ -189,7 +201,7 @@ class Home extends Component {
                 }
             } */}
             {/* /> */}
-             </a>
+             {/* </a> */}
 
             </div> 
             </div> 

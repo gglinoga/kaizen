@@ -36,6 +36,7 @@ const style = {
 
 class Lesson extends Component {
     state = {
+        courseID: "",
         i: 0,
         courseName: "Example Lesson",
         lessonNames: ["LESSON 1: Welcome to Something", "Lesson 2: I didn't think I will get this far"],
@@ -65,6 +66,52 @@ class Lesson extends Component {
             });
         }
     };
+
+    callAPI = () => {
+        fetch("/users/currentCourse", {
+            method: 'GET',
+        })
+        .then(res => {
+            let foo = res.json();
+            foo.then(json => {
+                this.setState({courseID: json[0].currentCourse})
+               })
+        }).then()
+        .catch(error => {
+            if (error) throw error
+        })
+    }
+
+    getLesson= () => {
+        console.log('GL ' + this.state.courseID)
+        fetch("/api/lesson", {
+            method: 'POST',
+            headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+                id: this.state.courseID
+			})
+        }).then( (res) => {
+            console.log(this.state.courseID);
+            let foo = res.json();
+            foo.then(json => {
+                console.log(json);
+                    })
+        })   
+        .catch(error => {
+            if (error) throw error
+        })
+    }
+
+    componentWillMount () {
+        this.callAPI()
+    }
+    componentDidUpdate() {
+        this.getLesson();
+    }
+
 
     render() {
         console.log(this.state.quizzes[this.state.i].choices)
