@@ -131,6 +131,35 @@ app.post('/users/register', (req, res) => {
     )}
 )
     
+app.post('/users/currentCourse', (req, res) => {
+    knex('users').where({ id: 1 }).update({ currentCourse: req.body.currentCourse})
+    .then((response, err) => {
+        if (err) throw err;
+    })
+})
+
+app.get('/users/currentCourse', (req, res) => {
+    knex.select().from('users').where({ id: 1 })
+    .then((response, err) => {
+        if (err) throw err;
+        res.json(response);
+    })
+})
+
+app.post('/api/lesson', (req, res) => {
+    knex.select('*').from('courses').join('lessons', {
+        'courses.id': "lessons.courseID"
+    })
+    .where('courses.id', req.body.id)
+    .then(function (response, err) {
+        if (err) throw err;
+        console.log(response);
+        res.json(response)
+    }).finally(() => {
+        console.log("done");
+        // knex.destroy();
+    });
+})
 
 // app.post('/users/login', (req, res) => {
 //     console.log(req.body);

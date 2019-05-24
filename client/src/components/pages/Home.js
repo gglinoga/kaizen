@@ -32,26 +32,47 @@ const style = {
 }
 
 class Home extends Component {
-    
+
     state = {
         show: false,
         modalOn: false,
         apiResponse: "",
         courseArray: [],
+        login: false
 
     }
     showModal = () => {
-        console.log("click!");
         this.setState({
             ...this.state,
             show: !this.state.show
         });
     }
 
+    handleClick = (id) => {
+        console.log(id);
+        fetch("/users/currentCourse", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                currentCourse: id,
+                currentLessons: id
+            })
+        })
+            .catch(error => {
+                if (error) throw error
+            });
+
+        if (!this.state.login) {
+            this.showModal()
+        }
+    }
+
     loginEvent = (e) => {
         e.preventDefault();
-        console.log(this.state.modalOn);
-        console.log("test LoginEvent");
+        console.log('test');
         if (this.state.show === false) {
             console.log(this.state.modalOn);
             this.showModal()
@@ -59,17 +80,16 @@ class Home extends Component {
 
     }
 
-
     callAPI(data) {
         console.log('callAPI')
         fetch("/api/courses", {
-                method: 'GET',
-            })
+            method: 'GET',
+        })
             .then(res => {
                 let foo = res.json();
                 foo.then(json => {
                     console.log(json);
-                    this.setState({ courseArray: json})
+                    this.setState({ courseArray: json })
                     console.log(this.state.courseArray)
                 })
 
@@ -85,34 +105,34 @@ class Home extends Component {
     }
 
     render() {
-    return (
-        <div>
-        <Navbar/>
+        return (
+            <div>
+                <Navbar />
 
-        <Modal
-         onClose={this.showModal}
-         show={this.state.show}>
-         </Modal>
-         
-        <div style={style.home}>
-        <div className="row" style={style.row1}></div>
+                <Modal
+                    onClose={this.showModal}
+                    show={this.state.show}>
+                </Modal>
 
-        <div className="row">
-            <div className="col-2"></div>
-            <div className="col-8" style={style.content}>
-                <div className="row" style={style.description}>
-                    <div className="col-12" style={style.course}>
-                        <h2>Learning is fun</h2>
-                        <h5>Pick a course.</h5>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12">
-                        <div className="d-flex flex-wrap justify-content-center">
+                <div style={style.home}>
+                    <div className="row" style={style.row1}></div>
 
-                <a onClick = {this.loginEvent}>
+                    <div className="row">
+                        <div className="col-2"></div>
+                        <div className="col-8" style={style.content}>
+                            <div className="row" style={style.description}>
+                                <div className="col-12" style={style.course}>
+                                    <h2>Learning is fun</h2>
+                                    <h5>Pick a course.</h5>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="d-flex flex-wrap justify-content-center">
 
-{/* Hardcorded Courses
+                                        <a onClick={this.loginEvent}>
+
+                                            {/* Hardcorded Courses
                 <Course course=
                     {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
                 />
@@ -127,32 +147,31 @@ class Home extends Component {
                     {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
                 /> */}
 
-{/* Mapped Courses */}
-<table>
-    <tr>
-{this.state.courseArray.map(course => (
-    <Course
-        id={course.id}
-        title={course.courseName}
-        // description={course.description}
-        // numLessons={course.material.length}
-    />
-))}
+                                            {/* Mapped Courses */}
+                                            <table>
+                                                <tr>
+                                                    {this.state.courseArray.map(course => (
+                                                        <Course
+                                                            id={course.id}
+                                                            title={course.courseName}
+                                                        // description={course.description}
+                                                        // numLessons={course.material.length}
+                                                        />
+                                                    ))}
 
-    </tr>
-</table>
+                                                </tr>
+                                            </table>
+                                    </a>
+                                </div>
 
-
-                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             </div>
-        </div>
-        <div classNameName="row" style={style.row2}></div>
-        </div>
-        </div>
-        </div>
-    )};
-    }
+        )
+    };
+}
 
 export default Home;

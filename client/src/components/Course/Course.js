@@ -1,5 +1,4 @@
 import React from "react";
-import { MDBContainer } from "mdbreact";
 
 const style = {
 
@@ -18,15 +17,13 @@ const style = {
 }
 
 const Course = props => (
-    // <MDBContainer>
     <td>
-    <div style={style.card} onClick={props.loginEvent}>
+    <div style={style.card} onClick={()=>props.handleClick(props.id)}>
             <p>{props.title}</p>
             {/* <p>{props.course.description}</p> */}
             {/* <p>No. Lessons: {props.course.numLessons}</p> */}
     </div>
     </td>
-    // </MDBContainer>
 );
 
 export default Course;

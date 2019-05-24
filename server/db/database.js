@@ -60,12 +60,11 @@ createLessons = () => {
 createUsers = () => {
     knex.schema.createTable('users', table => {
         table.increments();
-        // table.string('userName');
-        // table.unique('userName')
         table.string('email');
         table.unique('email');
         table.string('password');
         table.json('currentLessons');
+        table.integer('currentCourse');
     }).then((response, err) => {
         if (err) throw err;
     }).finally()
