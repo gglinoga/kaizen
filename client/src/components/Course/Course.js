@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer } from "mdbreact";
+// import { MDBContainer } from "mdbreact";
 
 const style = {
 
@@ -11,21 +11,19 @@ const style = {
         color: "white",
         margin: "5px 5px",
         backgroundImage: "linear-gradient(to bottom, blue, red)",
-        border: "grey 2px solid"
+        border: "grey 2px solid",
 
     },
 }
 
 const Course = props => (
-    <MDBContainer>
-    <div class="container">
+    // <MDBContainer>
     <div style={style.card} onClick={props.loginEvent}>
-            <p>{props.title}</p>
-            {/* <p>Description: {props.course.description}</p> */}
-            {/* <p>Number of Lessons: {props.course.numLessons}</p> */}
+            <p>{props.course.title}</p>
+            {/* <p>{props.course.description}</p> */}
+            {/* <p>No. Lessons: {props.course.numLessons}</p> */}
     </div>
-    </div>
-    </MDBContainer>
+    // </MDBContainer>
 );
 
 export default Course;

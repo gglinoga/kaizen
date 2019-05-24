@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from "react";
+import React, { Component } from "react";
 import Course from "../Course/Course.js";
 import Navbar from "../Navbar/Navbar";
 import Modal from "../Modal/Modal";
@@ -19,7 +17,7 @@ const style = {
         backgroundColor: "white",
         padding: "20px 30px 500px 30px",
         height: "auto",
-        align: "center",
+        // align: "center",
     },
 
     description: {
@@ -38,7 +36,7 @@ const style = {
 }
 
 class Home extends Component {
-    
+
     state = {
         show: false,
         modalOn: false,
@@ -76,25 +74,25 @@ class Home extends Component {
     callAPI(data) {
         console.log('callAPI')
         fetch("/api/courses", {
-                method: 'GET',
-                // body: JSON.stringify(data),
-                // headers: {
-                //     'Content-Type': 'application/json',
-                // },
-            })
-            .then(res => {
-                // res.json(data),
-                let foo = res.json();
+            method: 'GET',
+            // body: JSON.stringify(data),
+            // headers: {
+            //     'Content-Type': 'application/json',
+            // },
+        })
+            // .then(res => {
+            //     // res.json(data),
+            //     let foo = res.json();
 
-                foo.then(json => {
-                    console.log(json);
-                    this.setState({ courseArray: json})
-                    console.log(this.state.courseArray)
-                    // console.log(json[0].lessonMaterial)
-                })
-                // console.log(res.json());
+            //     foo.then(json => {
+            //         console.log(json);
+            //         this.setState({ courseArray: json})
+            //         console.log(this.state.courseArray)
+            //         // console.log(json[0].lessonMaterial)
+            //     })
+            //     // console.log(res.json());
 
-            })
+            // })
             // .then(res => this.setState({ apiResponse: res.body.lessonMaterial }))
             .catch(error => {
                 if (error) throw error
@@ -111,92 +109,63 @@ class Home extends Component {
 
 
     render() {
-        return ( <div>
-            <
-            Navbar / >
-            <Modal onClose = {
-                this.showModal
-            }
-            show = {
-                this.state.show
-            } >
-            </Modal>
+        return (
 
-            <div style = {
-                style.home
-            } >
-            <div className = "row" >
-            <div className = "col-2" >
-            </div> <div className = "col-8"
-            style = {
-                style.content
-            } >
-            <div className = "row"
-            style = {
-                style.description
-            } >
-            <div className = "col-12" >
-            <h2> Learning is fun </h2> 
-            <h5> Qui consectetur amet mollit culpa laborum nulla aute ullamco aliquip sit veniam. </h5> </div> 
-            </div> 
-            <div className = "row">
-            <div className = "col-12 d-flex flex-wrap"
-            style = {
-                style.course
-            } >
+            <div>
+                <Navbar />
+                <Modal onClose={this.showModal} show={this.state.show} >
+                </Modal>
 
-            <a onClick = {
-                this.loginEvent
-            } >
+                <div style={style.home} >
+                    <div className="row" >
+                        <div className="col-2" > </div>
+                        <div className="col-8" style={style.content} >
+                            <div className="row" style={style.description} >
 
-{this.state.courseArray.map(course => (
-                                        <Course
-                                            id={course.id}
-                                            title={course.courseName}
-                                            // description={course.description}
-                                            // numLessons={course.material.length}
+                                <div className="col-12" >
+                                    <h2> Learning is fun. </h2>
+                                    <h5> Pick a course. </h5>
+                                </div>
+                            </div>
+                            <div className="row">
+
+                                <table className="table" style={style.course}>
+                                    <tr>
+                                        <td>
+                                        <Course style={style.course} course={
+                                            {
+                                                title: "Javascript",
+                                                description: "JS Description",
+                                                numLessons: "10"
+                                            }
+                                        }
                                         />
-                                    ))}
+                                        </td>
+                                        <td><Course course={
+                                            {
+                                                title: "React",
+                                                description: "React Description",
+                                                numLessons: "10"
+                                            }
+                                        }
+                                        /></td>
+                                        <td><Course course={
+                                            {
+                                                title: "HTML & CSS",
+                                                description: "HTML & CSS Description",
+                                                numLessons: "10"
+                                            }
+                                        }
+                                        /></td>
+                                    </tr>
+                                    
+                                </table>
 
-
-            {/* <Course style = {
-                style.course
-            }
-            course = {
-                {
-                    title: "Javascript",
-                    backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')",
-                    description: "JS Description",
-                    numLessons: "10"
-                }
-            }
-            />
-
-            <Course course = {
-                {
-                    title: "React",
-                    description: "React Description",
-                    numLessons: "10"
-                }
-            }
-            />
-
-            <Course course = {
-                {
-                    title: "HTML & CSS",
-                    description: "HTML & CSS Description",
-                    numLessons: "10"
-                }
-            } */}
-            {/* /> */}
-             </a>
-
-            </div> 
-            </div> 
-            </div> 
-            </div> 
-            </div> 
-            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         )
     }
 }
