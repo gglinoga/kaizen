@@ -28,6 +28,7 @@ const style = {
         overflow: "auto",
         padding: "20px",
     },
+
 }
 
 class Home extends Component {
@@ -100,7 +101,7 @@ class Home extends Component {
             <div className="col-2"></div>
             <div className="col-8" style={style.content}>
                 <div className="row" style={style.description}>
-                    <div className="col-12">
+                    <div className="col-12" style={style.course}>
                         <h2>Learning is fun</h2>
                         <h5>Pick a course.</h5>
                     </div>
@@ -110,6 +111,8 @@ class Home extends Component {
                         <div className="d-flex flex-wrap justify-content-center">
 
                 <a onClick = {this.loginEvent}>
+
+{/* Hardcorded Courses
                 <Course course=
                     {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
                 />
@@ -122,7 +125,24 @@ class Home extends Component {
                 <a onClick = {this.loginEvent}>
                 <Course course=
                     {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
-                />
+                /> */}
+
+{/* Mapped Courses */}
+<table>
+    <tr>
+{this.state.courseArray.map(course => (
+    <Course
+        id={course.id}
+        title={course.courseName}
+        // description={course.description}
+        // numLessons={course.material.length}
+    />
+))}
+
+    </tr>
+</table>
+
+
                 </a>
                 </div>
             </div>
