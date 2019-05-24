@@ -131,12 +131,12 @@ app.post('/users/register', (req, res) => {
     )}
 )
     
+app.post('/users/currentCourse', (req, res) => {
+    console.log(req.body.currentCourse);
+    knex('users').where({id: 1}).update({currentCourse: req.body.currentCourse})
+    .then((response, err) => {
+        if (err) throw err;
+        res.render(response);
+    })
+})
 
-// app.post('/users/login', (req, res) => {
-//     console.log(req.body);
-//     console.log('login');
-// }).then((response, err) => {
-//     if (err) throw err;
-//     console.log(response);
-//     res.json(response)
-// })

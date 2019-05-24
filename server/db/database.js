@@ -66,6 +66,7 @@ createUsers = () => {
         table.unique('email');
         table.string('password');
         table.json('currentLessons');
+        table.string('currentCourse');
     }).then((response, err) => {
         if (err) throw err;
     }).finally()
