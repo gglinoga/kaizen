@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Course from "../Course/Course.js";
 import Navbar from "../Navbar/Navbar";
-import Modal from "../Modal/Modal";
+import Modal from "../../components/Modal/Modal"
 
 const style = {
 
@@ -17,7 +17,7 @@ const style = {
         backgroundColor: "white",
         padding: "20px 30px 500px 30px",
         height: "auto",
-        // align: "center",
+        align: "center",
     },
 
     description: {
@@ -28,15 +28,10 @@ const style = {
         overflow: "auto",
         padding: "20px",
     },
-
-    course: {
-        justifyContent: "center",
-    },
-
 }
 
 class Home extends Component {
-
+    
     state = {
         show: false,
         modalOn: false,
@@ -64,36 +59,20 @@ class Home extends Component {
     }
 
 
-    // callAPI(data){
-    //     fetch('/api/lessons', {method: 'GET', body: JSON.stringify(data),
-    // })
-    // .then(response => {
-    //     console.log(response)
-    // })
-    // }
     callAPI(data) {
         console.log('callAPI')
         fetch("/api/courses", {
-            method: 'GET',
-            // body: JSON.stringify(data),
-            // headers: {
-            //     'Content-Type': 'application/json',
-            // },
-        })
-            // .then(res => {
-            //     // res.json(data),
-            //     let foo = res.json();
+                method: 'GET',
+            })
+            .then(res => {
+                let foo = res.json();
+                foo.then(json => {
+                    console.log(json);
+                    this.setState({ courseArray: json})
+                    console.log(this.state.courseArray)
+                })
 
-            //     foo.then(json => {
-            //         console.log(json);
-            //         this.setState({ courseArray: json})
-            //         console.log(this.state.courseArray)
-            //         // console.log(json[0].lessonMaterial)
-            //     })
-            //     // console.log(res.json());
-
-            // })
-            // .then(res => this.setState({ apiResponse: res.body.lessonMaterial }))
+            })
             .catch(error => {
                 if (error) throw error
             });
@@ -104,70 +83,56 @@ class Home extends Component {
         console.log('mount');
     }
 
-
-
-
-
     render() {
-        return (
+    return (
+        <div>
+        <Navbar/>
 
-            <div>
-                <Navbar />
-                <Modal onClose={this.showModal} show={this.state.show} >
-                </Modal>
+        <Modal
+         onClose={this.showModal}
+         show={this.state.show}>
+         </Modal>
+         
+        <div style={style.home}>
+        <div className="row" style={style.row1}></div>
 
-                <div style={style.home} >
-                    <div className="row" >
-                        <div className="col-2" > </div>
-                        <div className="col-8" style={style.content} >
-                            <div className="row" style={style.description} >
-
-                                <div className="col-12" >
-                                    <h2> Learning is fun. </h2>
-                                    <h5> Pick a course. </h5>
-                                </div>
-                            </div>
-                            <div className="row">
-
-                                <table className="table" style={style.course}>
-                                    <tr>
-                                        <td>
-                                        <Course style={style.course} course={
-                                            {
-                                                title: "Javascript",
-                                                description: "JS Description",
-                                                numLessons: "10"
-                                            }
-                                        }
-                                        />
-                                        </td>
-                                        <td><Course course={
-                                            {
-                                                title: "React",
-                                                description: "React Description",
-                                                numLessons: "10"
-                                            }
-                                        }
-                                        /></td>
-                                        <td><Course course={
-                                            {
-                                                title: "HTML & CSS",
-                                                description: "HTML & CSS Description",
-                                                numLessons: "10"
-                                            }
-                                        }
-                                        /></td>
-                                    </tr>
-                                    
-                                </table>
-
-                                </div>
-                            </div>
-                        </div>
+        <div className="row">
+            <div className="col-2"></div>
+            <div className="col-8" style={style.content}>
+                <div className="row" style={style.description}>
+                    <div className="col-12">
+                        <h2>Learning is fun</h2>
+                        <h5>Pick a course.</h5>
                     </div>
                 </div>
-        )
+                <div className="row">
+                    <div className="col-12">
+                        <div className="d-flex flex-wrap justify-content-center">
+
+                <a onClick = {this.loginEvent}>
+                <Course course=
+                    {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
+                />
+                </a>
+                <a onClick = {this.loginEvent}>
+                <Course course=
+                    {{ title: "React", description: "React Description", numLessons: "10" }}
+                />
+                </a>
+                <a onClick = {this.loginEvent}>
+                <Course course=
+                    {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
+                />
+                </a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div classNameName="row" style={style.row2}></div>
+        </div>
+        </div>
+        </div>
+    )};
     }
-}
 
 export default Home;
