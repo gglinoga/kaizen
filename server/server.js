@@ -40,33 +40,6 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-app.post('/users/login', function (req, res){
-    console.log("testroute");
-    if(req.body.email && req.body.password){
-        var name = req.body.email;
-        var password = req.body.password
-    }
-    console.log(name);
-    console.log(password);
-    var user = knex('users').select().where({ name: name })
-    // var loginpw = knex('users').where({ password: password})
-    if(name === user){
-        console.log('yes')
-    }
-    else if (name !== user){
-        res.status(401).json({message: "no such user found"});
-    }
-    console.log(user);
-    // if(loginpw === password){
-    //     var payload = {id: user.id};
-    //     var token = jwt.sign(payload, jwtOptions.secretOrKey);
-    //     res.json({message: "ok", token: token});
-    // } 
-    // else {
-    //     res.status(401).json({message: "passwords did not match"});
-    // }
-});
-
 passport.serializeUser(function(user, done) {
     done(null, user);
   });
@@ -195,14 +168,57 @@ app.post('/api/lesson', (req, res) => {
     });
 })
 
-// app.post('/users/login', (req, res) => {
-//     console.log(req.body);
-//     console.log('login');
-// }).then((response, err) => {
-//     if (err) throw err;
-//     console.log(response);
-//     res.json(response)
-// })
+app.post('/users/login', function (req, res){
+    // console.log("testroute");
+    if(req.body.email && req.body.password){
+        var name = req.body.email;
+        var password = req.body.password
+    }
+    // console.log(name);
+    // console.log(password);
+    knex('users').select().where({ email: name })
+    .then(function (response, err) {
+        if (err) throw err;
+        // console.log(response);
+        var user = response[0].email;
+        var hash = response[0].password;
+        // console.log(hash);
+        if (response[0].email) {
+            console.log("user found");
+            bcrypt.compare(password, hash, function(err, res) {
+                if(res) {
+                  console.log('Passwords match')
+                  generateToken();
+                } else {
+                 console.log('passwords dont match')
+                } 
+              });
+        };
+        function generateToken() {
+            var payload = {id: user.id};
+            var token = jwt.sign(payload, jwtOptions.secretOrKey);
+            res.json({message: "ok", token: token});
+            console.log(user.id);
+            console.log('generate token' + token);
+        } 
+        // else {
+        //     res.status(401).json({message: "passwords did not match"});
+        // }  
+        //****not working
+        // if (response.length < 2) {
+        //     console.log("no user found");
+        //     // res.status(401).json({message: "no such user found"});
+        // }   
+    });
+});
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
 
 app.listen(PORT, () => {
     console.log("app listening on PORT " + PORT);
