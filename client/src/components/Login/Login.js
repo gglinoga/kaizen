@@ -15,7 +15,7 @@ const style = {
 	img: {
 		display: "table",
 		margin: "auto"
-	}
+	},
 
 }
 
@@ -52,13 +52,32 @@ handleInputChange = event => {
       alert(
 				("Fill out your password please or we will feed you to Drogon!")
 			)
-    }
-    // this.setState({
-    //   email: "",
-    //   password: ""
-    // });
+			}
+			else {
+				this.loginUser();
+			}
+		console.log(this.state.loginemail);
+		console.log(this.state.loginpassword)
 	};
-	
+
+	loginUser(req) {
+		console.log('loginuser')
+		fetch("/users/login", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: this.state.loginemail,
+				password: this.state.loginpassword
+			})
+		})
+		.catch(error => {
+			if (error) throw error
+		});
+	}
+
 	handleRegisterSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
@@ -81,7 +100,6 @@ handleInputChange = event => {
 	
 	registerUser(req) {
 		console.log('register-client')
-
 		fetch("/users/register", {
 			method: 'POST',
 			headers: {
@@ -105,9 +123,11 @@ handleInputChange = event => {
 
 				<img src={logo} style={style.img}></img>
 
-				<div id="login">
+				<div className="row">
+
+				<div className="col-6" id="login">
 								<h4>Login</h4>
-									<form action="/users/login" method="GET">
+									<form action="/users/login" method="POST">
 
 										<div className="form-group">
 											<label for="email">Email</label>
@@ -136,21 +156,18 @@ handleInputChange = event => {
 										</div>
 
 										<br></br>
-										<input type="submit" onClick={this.handleLoginSubmit} value="Login" />
+										<div className="text-center">
+											<input type="submit" onClick={this.handleLoginSubmit} value="Login" />
+											</div>
 
 
 
 								</form>
-								</div>
-								<br></br>
+				</div>
 
-				<h4>Don't Have An Account? - Register for Free</h4>
+						<div className="col-6" id="register">
+						<h4>Don't Have An Account? - Register for Free</h4>
 
-				<div className="row">
-
-					<div className="col-md-12">
-
-						<div id="register">
 						<form action="/users/register" method="POST">
 
 							<div className="form-group">
@@ -191,17 +208,13 @@ handleInputChange = event => {
 									onChange={this.handleInputChange}>
 								</input>
 							</div>
-
 							<br></br>
-
+							<div className="text-center">
 							<input type="submit" onClick={this.handleRegisterSubmit} value="Register" />
-
+							</div>
 							<br></br>
 					</form>
 					</div>
-					<hr></hr>
-
-							</div>
 							</div>
 							</div>
 	  )};

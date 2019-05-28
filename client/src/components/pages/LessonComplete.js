@@ -50,7 +50,6 @@ class Lesson extends Component {
             .then(res => {
                 // res.json(data),
                 let foo = res.json();
-
                 foo.then(json => {
                     console.log(json);
                     this.setState({ courseArray: json})
@@ -100,7 +99,7 @@ class Lesson extends Component {
                 <Navbar courseTitle={this.state.courseName} />
                 <Sidenav />
                 <div style={style.home}>
-                <div className="row" style={style.row1}></div>
+                <div className="row"></div>
                 <div className="row">
                         <div className="col-2"></div>
                         <div className="col-8" style={style.content}>

@@ -98,15 +98,15 @@ class Home extends Component {
         fetch("/api/courses", {
             method: 'GET',
         })
-            .then(res => {
-                let foo = res.json();
-                foo.then(json => {
-                    console.log(json);
-                    this.setState({ courseArray: json })
-                    console.log(this.state.courseArray)
-                })
+            // .then(res => {
+            //     let foo = res.json();
+            //     foo.then(json => {
+            //         console.log(json);
+            //         this.setState({ courseArray: json })
+            //         console.log(this.state.courseArray)
+            //     })
 
-            })
+            // })
             .catch(error => {
                 if (error) throw error
             });
