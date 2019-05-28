@@ -3,9 +3,34 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const bcrypt = require('bcrypt');
+var _ = require("lodash");
+var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
+var passport = require('passport');
+var passportJWT = require('passport-jwt');
 
+var ExtractJwt = passportJWT.ExtractJwt;
+var JwtStrategy = passportJWT.Strategy;
 
-var bodyParser = require('body-parser')
+var jwtOptions = {}
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken('Bearer');
+jwtOptions.secretOrKey = 'tasmanianDevil';
+
+var strategy = new JwtStrategy(jwtOptions,
+    function(jwt_payload, next){
+        console.log('payload received', jwt_payload);
+        //this is the database call
+        var user = users[_.findIndex(users, {id: jwt_payload.id})];
+        if (user) {
+            next(null, user);
+        } else {
+            next(null, false);
+        }
+    });
+
+    passport.use(strategy);
+
+    app.use(passport.initialize());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -15,9 +40,40 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json())
 
-app.listen(PORT, () => {
-    console.log("app listening on PORT " + PORT);
+app.post('/users/login', function (req, res){
+    console.log("testroute");
+    if(req.body.email && req.body.password){
+        var name = req.body.email;
+        var password = req.body.password
+    }
+    console.log(name);
+    console.log(password);
+    var user = knex('users').select().where({ name: name })
+    // var loginpw = knex('users').where({ password: password})
+    if(name === user){
+        console.log('yes')
+    }
+    else if (name !== user){
+        res.status(401).json({message: "no such user found"});
+    }
+    console.log(user);
+    // if(loginpw === password){
+    //     var payload = {id: user.id};
+    //     var token = jwt.sign(payload, jwtOptions.secretOrKey);
+    //     res.json({message: "ok", token: token});
+    // } 
+    // else {
+    //     res.status(401).json({message: "passwords did not match"});
+    // }
 });
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
 
 app.get('/api/lessons', (req, res) => {
     //find all query
@@ -87,34 +143,12 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
         });
 })
 
-app.get('/users/login', (req, res) => {
-    knex.select().from('users').where({
-        email: req.body.email,
-        password: req.body.password
-    })
-        .then(function (response, err) {
-            if (err) throw err;
-            console.log(response);
-            res.json(response)
-            if (!response) {
-                console.log("no record")
-            }
-            else {
-                console.log(response)
-            }
-            res.json(response)
-        }).finally(() => {
-            console.log('done');
-        })
-}
-)
+
 
 app.post('/users/register', (req, res) => {
-
     bcrypt.genSalt(10, (err, salt) =>
         bcrypt.hash(req.body.password, salt, (err, hash) => {
             if(err) throw err;   
-            
             console.log(req)
             console.log("register")
             knex('users').insert({
@@ -169,3 +203,7 @@ app.post('/api/lesson', (req, res) => {
 //     console.log(response);
 //     res.json(response)
 // })
+
+app.listen(PORT, () => {
+    console.log("app listening on PORT " + PORT);
+});
