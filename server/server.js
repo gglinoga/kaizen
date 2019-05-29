@@ -133,7 +133,8 @@ app.post('/users/register', (req, res) => {
                 email: req.body.email,
                 password: hash
         
-            }).then((response, err) => {
+            })
+            .then((response, err) => {
                 if (err) throw err;
                 console.log(response);
                 res.json(req.body);
@@ -154,6 +155,19 @@ app.get('/users/currentCourse', (req, res) => {
     .then((response, err) => {
         if (err) throw err;
         res.json(response);
+    })
+})
+
+//add new course
+app.post('api/newCourse', (req, res) => {
+    knex('courses').insert({
+        courseName: req.body.courseName,
+        coursePic: req.body.coursePic
+    })
+    .then((response, err) => {
+        if (err) throw err;
+        console.log(response);
+        res.json(req.body);
     })
 })
 
