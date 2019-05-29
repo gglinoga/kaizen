@@ -33,7 +33,6 @@ const style = {
 
 }
 
-
 class Lesson extends Component {
     state = {
         courseID: "",
@@ -71,7 +70,8 @@ class Lesson extends Component {
             foo.then(json => {
                 this.setState({courseID: json[0].currentCourse})
                })
-        }).then()
+        })
+        .then()
         .catch(error => {
             if (error) throw error
         })
