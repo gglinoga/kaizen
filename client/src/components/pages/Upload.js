@@ -1,16 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
 import Navbar from "../Navbar/Navbar";
+import Uploadform from "../../components/Uploadform/Uploadform";
 
-function Upload() {
+class Upload extends Component {
+
+
+render() {
     return (
         <div>
             <Navbar />
-            <div class='container'>
-            <p>Select a file: </p>
-            <input type="file" name="myFile"/>
+            <div className='container'>
+            <Uploadform />
+      
             </div>
         </div>
-    )
+    )}
 }
 
-export default Upload;
+export default Upload;  
