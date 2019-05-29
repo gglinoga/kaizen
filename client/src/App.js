@@ -5,6 +5,7 @@ import Home from '../src/components/pages/Home.js';
 import Lesson from '../src/components/pages/Lesson.js';
 import LessonComplete from '../src/components/pages/LessonComplete.js'
 import User from '../src/components/pages/User.js'
+import Upload from '../src/components/pages/Upload.js'
 
 
 const style = {
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/Lesson" component={Lesson}/>
       <Route exact path="/LessonComplete" component={LessonComplete}/>
       <Route exact path="/User" component={User}/>
+      <Route exact path="/Upload" component={Upload}/>
       <Footer/>
     </div>
       </Router>
