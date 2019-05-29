@@ -3,11 +3,12 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const bcrypt = require('bcrypt');
-var _ = require("lodash");
-var bodyParser = require('body-parser');
-var jwt = require('jsonwebtoken');
-var passport = require('passport');
-var passportJWT = require('passport-jwt');
+const _ = require("lodash");
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const passportJWT = require('passport-jwt');
+const morgan = require('morgan');
 
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
@@ -39,6 +40,9 @@ app.use(bodyParser.urlencoded({
 
 // parse application/json
 app.use(bodyParser.json())
+
+//log requests to console
+app.use(morgan('dev'));
 
 passport.serializeUser(function(user, done) {
     done(null, user);
@@ -174,41 +178,32 @@ app.post('/users/login', function (req, res){
         var name = req.body.email;
         var password = req.body.password
     }
-    // console.log(name);
-    // console.log(password);
     knex('users').select().where({ email: name })
     .then(function (response, err) {
         if (err) throw err;
-        // console.log(response);
         var user = response[0].email;
         var hash = response[0].password;
-        // console.log(hash);
-        if (response[0].email) {
-            console.log("user found");
+        if (!user) {
+            console.log("User Not Found")
+        }
+        else if (user && !err) {
             bcrypt.compare(password, hash, function(err, res) {
                 if(res) {
                   console.log('Passwords match')
                   generateToken();
                 } else {
-                 console.log('passwords dont match')
+                 console.log('passwords dont match');
                 } 
               });
         };
         function generateToken() {
             var payload = {id: user.id};
-            var token = jwt.sign(payload, jwtOptions.secretOrKey);
-            res.json({message: "ok", token: token});
-            console.log(user.id);
-            console.log('generate token' + token);
+            var token = jwt.sign(payload, jwtOptions.secretOrKey, {
+                expiresIn: 10000
+            });
+            res.json({message: "ok", token: "JWT " + token});
+            console.log('generate token ' + "JWT " + token);
         } 
-        // else {
-        //     res.status(401).json({message: "passwords did not match"});
-        // }  
-        //****not working
-        // if (response.length < 2) {
-        //     console.log("no user found");
-        //     // res.status(401).json({message: "no such user found"});
-        // }   
     });
 });
 
@@ -219,6 +214,10 @@ passport.serializeUser(function(user, done) {
   passport.deserializeUser(function(user, done) {
     done(null, user);
   });
+
+app.get("/dashboard", passport.authenticate('jwt', { session: false }), function(req, res){
+    res.send("it worked! user id is " + req.user.id + '.');
+})
 
 app.listen(PORT, () => {
     console.log("app listening on PORT " + PORT);
