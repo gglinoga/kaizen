@@ -80,7 +80,7 @@ handleInputChange = event => {
 
 	handleRegisterSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
-    event.preventDefault();
+		event.preventDefault();
     if (!this.state.registeremail) {
       alert("Fill out your email please or we will feed you to Drogon!");
     } else if (this.state.password.length < 6) {
