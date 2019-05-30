@@ -2,8 +2,8 @@ const options = {
     client: "mysql2",
     connection: {
         host: 'localhost',
-        user: 'user',
-        password: 'password',
+        user: 'admin',
+        password: 'asdfasdf',
         database: 'kaizen_db'
     }
 };
