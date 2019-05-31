@@ -4,8 +4,13 @@ class Uploadform extends Component {
 
     state = {
         courseName: "",
-        coursePic: ""
-    }
+        coursePic: "",
+        lessonMaterial: "",
+        textContent: "",
+        lessonPic: "",
+        quiz: "",
+        lessonNum: "",
+    };
 
     handleInputChange = event => {
         let value = event.target.value;
@@ -14,7 +19,50 @@ class Uploadform extends Component {
         this.setState({
             [name]: value
         });
+        this.newCourse();
     };
+
+    newCourse = () =>{
+		fetch("/api/newCourse", {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({
+				courseName: this.state.courseName,
+                coursePic: this.state.coursePic,
+                lessonMaterial: this.state.lessonMaterial,
+                textContent: this.state.textContent,
+                lessonPic: this.state.lessonPic,
+                quiz: this.state.quiz,
+                lessonNum: this.state.lessonNum,
+			})
+		})
+		.catch(error => {
+			if (error) throw error
+		});
+    }
+    
+    handleNewCourse = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        event.preventDefault();
+        if (!this.state.courseName) {
+          alert(`Course Name is a Required Field!`);
+        } 
+        if (!this.state.coursePic) {
+            alert(`Course Pic is a Required Field!`);
+        }
+        if (!this.state.lessonMaterial) {
+            alert(`Lesson Material is a Required Field!`);
+        } 
+        if (!this.state.textContent) {
+            alert(`Course Name is Required Field!`);
+        } 
+        if (!this.state.quiz) {
+            alert(`Quiz is Required Field!`);
+        } 
+    }
 
     render () {
         return (
@@ -53,6 +101,77 @@ class Uploadform extends Component {
                             </div>
                         </div>
                     </div>
+
+
+                    <div className="form-row">
+                        <div className="col">
+                            <div className="form-group">
+                                <label for="lessonMaterial">Lesson Title</label>
+                                    <input
+                                        type="text"
+                                        id="lessonMaterial"
+                                        name="lessonMaterial"
+                                        class="form-control"
+                                        placeholder="Enter lesson title"
+                                        value = {this.state.lessonMaterial}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="col">
+                            <div className="form-group">
+                                <label for="textContent">Lesson Content</label>
+                                    <input
+                                        type="text"
+                                        id="textContent"
+                                        name="textContent"
+                                        class="form-control"
+                                        placeholder="Enter lesson content. Type \n at the end of each paragraph."
+                                        value = {this.state.textContent}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="col">
+                            <div className="form-group">
+                                <label for="lessonPic">Lesson Image</label>
+                                    <input
+                                        type="text"
+                                        id="lessonPic"
+                                        name="lessonPic"
+                                        class="form-control"
+                                        placeholder="Type url for lesson image (Optional)"
+                                        value = {this.state.lessonPic}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="col">
+                            <div className="form-group">
+                                <label for="quiz">Quiz</label>
+                                    <input
+                                        type="text"
+                                        id="quiz"
+                                        name="quiz"
+                                        class="form-control"
+                                        placeholder="Quiz"
+                                        value = {this.state.quiz}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" onClick={this.handleNewCourse} value="Add Course" />
                 </form>
             </div>
         )

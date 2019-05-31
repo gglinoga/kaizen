@@ -17,12 +17,10 @@ const style = {
 }
 
 const Course = props => (
-    <div className="text-center">
     <div style={style.card} onClick={()=>props.handleClick(props.id)}>
             <p>{props.title}</p>
             {/* <p>{props.course.description}</p> */}
             {/* <p>No. Lessons: {props.course.numLessons}</p> */}
-    </div>
     </div>
 );
 
