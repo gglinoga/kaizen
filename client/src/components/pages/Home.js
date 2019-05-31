@@ -142,38 +142,18 @@ class Home extends Component {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex flex-wrap justify-content-center">
-
-                                        {/* <a onClick={this.loginEvent}> */}
-
-                                            {/* Hardcorded Courses
-                <Course course=
-                    {{ title: "Javascript", backgroundImage: "url('https://cdn.pixabay.com/photo/2014/09/21/14/39/rain-455124_1280.jpg')", description: "JS Description", numLessons: "10" }}
-                />
-                </a>
-                <a onClick = {this.loginEvent}>
-                <Course course=
-                    {{ title: "React", description: "React Description", numLessons: "10" }}
-                />
-                </a>
-                <a onClick = {this.loginEvent}>
-                <Course course=
-                    {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
-                /> */}
-
-                                            {/* Mapped Courses */}
                                             <table>
-                                                <tr>
                                                     {this.state.courseArray.map(course => (
                                                         <Course
                                                             id={course.id}
                                                             title={course.courseName}
                                                             handleClick={this.handleClick}
+                                                            img={course.coursePic}
                                                         // description={course.description}
                                                         // numLessons={course.material.length}
                                                         />
                                                     ))}
 
-                                                </tr>
                                             </table>
                                     {/* </a> */}
                                 </div>
