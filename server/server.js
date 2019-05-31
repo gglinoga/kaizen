@@ -52,8 +52,8 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
 
+//get all lessons
 app.get('/api/lessons', (req, res) => {
-    //find all query
     console.log('get all lessons')
     knex.select().from('lessons')
         .then(function (response, err) {
@@ -66,6 +66,7 @@ app.get('/api/lessons', (req, res) => {
         })
 })
 
+//single lesson by lessonNum
 app.get('/api/lessons/:lesson_num', (req, res) => {
     knex.select().from('lessons').where('lessonNum', req.params.lesson_num)
         .then(function (response, err) {
@@ -78,8 +79,8 @@ app.get('/api/lessons/:lesson_num', (req, res) => {
         });
 })
 
+//all courses
 app.get('/api/courses', (req, res) => {
-    //find all query
     console.log('get all courses');
     knex.select().from('courses')
         .then(function (response, err) {
@@ -92,6 +93,7 @@ app.get('/api/courses', (req, res) => {
         })
 })
 
+//single course
 app.get('/api/courses/:course', (req, res) => {
     knex.select().from('courses').where('courseName', req.params.course)
         .then(function (response, err) {
@@ -104,6 +106,7 @@ app.get('/api/courses/:course', (req, res) => {
         });
 })
 
+//all lessons from one course
 app.get('/api/coursesJoinLesson/:id', (req, res) => {
     console.log('join courses on lesson');
     knex.select('*').from('courses').join('lessons', {
@@ -120,8 +123,7 @@ app.get('/api/coursesJoinLesson/:id', (req, res) => {
         });
 })
 
-
-
+//create new user
 app.post('/users/register', (req, res) => {
     bcrypt.genSalt(10, (err, salt) =>
         bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -142,7 +144,8 @@ app.post('/users/register', (req, res) => {
         })
     )}
 )
-    
+
+//post current course on click
 app.post('/users/currentCourse', (req, res) => {
     knex('users').where({ id: 1 }).update({ currentCourse: req.body.currentCourse})
     .then((response, err) => {
@@ -150,6 +153,7 @@ app.post('/users/currentCourse', (req, res) => {
     })
 })
 
+//get current course
 app.get('/users/currentCourse', (req, res) => {
     knex.select().from('users').where({ id: 1 })
     .then((response, err) => {
@@ -168,9 +172,25 @@ app.post('api/newCourse', (req, res) => {
         if (err) throw err;
         console.log(response);
         res.json(req.body);
-    })
+    });
 })
 
+//add new lesson
+app.post('api/newLesson', (req, res) => {
+    knex('lessons').insert({
+        lessonMaterial: req.body.lessonMaterial,
+        lessonPic: req.body.lessonPic,
+        textContent: req.body.textContent,
+        quiz: req.body.quiz
+    })
+    .then((response, err) => {
+        if (err) throw err;
+        console.log(response);
+        res.json(req.body);
+    });
+})
+
+//select lessons for single course
 app.post('/api/lesson', (req, res) => {
     knex.select('*').from('courses').join('lessons', {
         'courses.id': "lessons.courseID"
@@ -186,6 +206,7 @@ app.post('/api/lesson', (req, res) => {
     });
 })
 
+//user login
 app.post('/users/login', function (req, res){
     // console.log("testroute");
     if(req.body.email && req.body.password){
