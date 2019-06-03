@@ -3,7 +3,7 @@ import Modal from "../Modal/Modal";
 
 const navStyle = {
     backgroundImage: "linear-gradient(to right, blue, purple)",
-    fontFamily: "'Crimson Text', serif",
+    fontFamily: "'Questrial', sans-serif",
     fontWeight: "bolder",
     height: "auto",
     paddingLeft: "10px",
@@ -14,13 +14,18 @@ const navStyle = {
 const navLeft = {
     textAlign: "left",
     fontSize: "20px",
-    margin: "auto",    
+    margin: "auto",
+       
 }
 
 const navCenter = {
     margin: "auto",
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: "24px",
+    display: "table",
+    margin: "auto"
+
 }
 
 const a = {
@@ -71,15 +76,17 @@ render () {
         <nav class="home">
         <div class="row" style={navStyle}>
         <div class="col-4" style={navLeft}>
-                <a href="/"style={a}> home   </a>
+                <a href="/"style={a}><i class="fas fa-home"></i>   </a>
         </div>
         <div class="col-4" style={navCenter}>
-                <h2>kaizen</h2>
+                <h2><i class="fas fa-book-reader"></i></h2>
         </div>
         <div class="col-4" style={navRight}>
-            <a onClick={this.loginEvent} style={a} >login    </a>
+            <a onClick={this.loginEvent} style={a} ><i class="fas fa-sign-in-alt"></i>    </a>
             <a style={a}>|</a>
-            <a href="#" style={a}>     user    </a>
+            <a href="#" style={a}>     <i class="fas fa-user"></i>    </a>
+            <a style={a}>|</a>
+            <a href="/upload" style={a}>     <i class="fas fa-file-upload"></i>     </a>
         </div>
         </div>
         </nav>

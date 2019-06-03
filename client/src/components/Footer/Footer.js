@@ -2,7 +2,7 @@ import React from "react";
 
 const style = {
     footer: {
-        fontFamily: "'Crimson Text', serif",
+        fontFamily: "'Questrial', sans-serif",
         position: "fixed",
         left: "0",
         bottom: "0",
@@ -26,7 +26,7 @@ const Footer = () => (
     <div class="row">
         <div class="col-9"></div>
         <div class="col-3">
-            <a href="#" style={style.a}>live support      <i className="far fa-comment-dots"></i></a>
+            <a href="#" style={style.a}><i className="far fa-comment-dots"></i></a>
         </div>
         </div>
 

@@ -15,7 +15,7 @@ const style = {
 
     content: {
         backgroundColor: "white",
-        padding: "20px 30px 500px 30px",
+        padding: "20px 30px 100px 30px",
         height: "auto",
         align: "center",
     },
@@ -98,15 +98,15 @@ class Home extends Component {
         fetch("/api/courses", {
             method: 'GET',
         })
-            // .then(res => {
-            //     let foo = res.json();
-            //     foo.then(json => {
-            //         console.log(json);
-            //         this.setState({ courseArray: json })
-            //         console.log(this.state.courseArray)
-            //     })
+            .then(res => {
+                let foo = res.json();
+                foo.then(json => {
+                    console.log(json);
+                    this.setState({ courseArray: json })
+                    console.log(this.state.courseArray)
+                })
 
-            // })
+            })
             .catch(error => {
                 if (error) throw error
             });
@@ -135,8 +135,8 @@ class Home extends Component {
                         <div className="col-8" style={style.content}>
                             <div className="row" style={style.description}>
                                 <div className="col-12" style={style.course}>
-                                    <p>Learning is fun</p>
-                                    <h1>Pick a course.</h1>
+                                    <p>learning is fun</p>
+                                    <h1>pick a course</h1>
                                 </div>
                             </div>
                             <div className="row">
@@ -161,20 +161,17 @@ class Home extends Component {
                 /> */}
 
                                             {/* Mapped Courses */}
-                                            <table>
-                                                <tr>
                                                     {this.state.courseArray.map(course => (
                                                         <Course
                                                             id={course.id}
                                                             title={course.courseName}
                                                             handleClick={this.handleClick}
+                                                            img={course.coursePic}
                                                         // description={course.description}
                                                         // numLessons={course.material.length}
                                                         />
                                                     ))}
 
-                                                </tr>
-                                            </table>
                                     {/* </a> */}
                                 </div>
 
