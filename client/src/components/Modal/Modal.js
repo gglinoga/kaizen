@@ -18,7 +18,7 @@ const modalStyle = {
     backgroundColor: "#fff",
     borderRadius: 5,
     maxWidth: 1000,
-    minHeight: 700,
+    minHeight: 475,
     margin: '0 auto',
     padding: 30,
     position: "relative",
@@ -29,6 +29,14 @@ const footerStyle = {
     bottom: 20,
     align: "right"
     
+}
+
+const style = {
+    btn: {
+        backgroundColor: "mediumblue",
+        color: "white",
+        borderRadius: "20px"    
+}
 }
 
 export default class Modal extends React.Component {
@@ -50,7 +58,7 @@ export default class Modal extends React.Component {
                 {this.props.children}
                 <br></br>
                 <div className="text-center" style={footerStyle}>
-                    <button onClick={(e) => {this.onClose(e)}}>
+                    <button style={style.btn} onClick={(e) => {this.onClose(e)}}>
                         Close
                     </button>
                 </div>

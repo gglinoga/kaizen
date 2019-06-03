@@ -15,7 +15,7 @@ const style = {
 
     content: {
         backgroundColor: "white",
-        padding: "20px 30px 500px 30px",
+        padding: "20px 30px 100px 30px",
         height: "auto",
         align: "center",
     },
@@ -135,14 +135,14 @@ class Home extends Component {
                         <div className="col-8" style={style.content}>
                             <div className="row" style={style.description}>
                                 <div className="col-12" style={style.course}>
-                                    <p>Learning is fun</p>
-                                    <h1>Pick a course.</h1>
+                                    <p>learning is fun</p>
+                                    <h1>pick a course</h1>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-12">
                                     <div className="d-flex flex-wrap justify-content-center">
-                                            <table>
+
                                                     {this.state.courseArray.map(course => (
                                                         <Course
                                                             id={course.id}
@@ -153,8 +153,6 @@ class Home extends Component {
                                                         // numLessons={course.material.length}
                                                         />
                                                     ))}
-
-                                            </table>
                                     {/* </a> */}
                                 </div>
 

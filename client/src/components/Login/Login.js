@@ -9,7 +9,8 @@ const style = {
 
 	btn: {
 		backgroundColor: "mediumblue",
-		color: "white"
+		color: "white",
+		borderRadius: "20px"
 	},
 
 	img: {
@@ -120,17 +121,14 @@ handleInputChange = event => {
   render() {
 	  return(
 			<div id="modal" style={style.modal}>
-
-				<img src={logo} style={style.img}></img>
-
 				<div className="row">
 
 				<div className="col-6" id="login">
-								<h4>Login</h4>
+								<h4>login</h4>
 									<form action="/users/login" method="POST">
 
 										<div className="form-group">
-											<label for="email">Email</label>
+											<label for="email">email</label>
 											<input
 												type="email"
 												id="loginemail"
@@ -143,7 +141,7 @@ handleInputChange = event => {
 										</div>
 
 										<div className="form-group">
-											<label for="password">Password</label>
+											<label for="password">password</label>
 											<input
 												type="password"
 												id="loginpassword"
@@ -157,7 +155,7 @@ handleInputChange = event => {
 
 										<br></br>
 										<div className="text-center">
-											<input type="submit" onClick={this.handleLoginSubmit} value="Login" />
+											<input type="submit" style={style.btn} onClick={this.handleLoginSubmit} value="Login" />
 											</div>
 
 
@@ -166,51 +164,51 @@ handleInputChange = event => {
 				</div>
 
 						<div className="col-6" id="register">
-						<h4>Don't Have An Account? - Register for Free</h4>
+						<h4>don't have an account? - register for free</h4>
 
 						<form action="/users/register" method="POST">
 
 							<div className="form-group">
-								<label for="email">Email</label>
+								<label for="email">email</label>
 								<input
 									type="email"
 									id="registeremail"
 									name="registeremail"
 									class="form-control"
-									placeholder="Enter Email"
+									placeholder="email"
 									value={this.state.registeremail}
 									onChange={this.handleInputChange}>
 					</input>
 							</div>
 
 							<div className="form-group">
-								<label for="password">Password</label>
+								<label for="password">password</label>
 								<input
 									type="password"
 									id="password"
 									name="password"
 									class="form-control"
-									placeholder="Password"
+									placeholder="password"
 									value={this.state.password}
 									onChange={this.handleInputChange}>
 								</input>
 							</div>
 
 							<div className="form-group">
-								<label for="Confirm Password">Confirm Password</label>
+								<label for="confirm password">confirm password</label>
 								<input
 									type="password"
 									id="confirmpassword"
 									name="confirmpassword"
 									class="form-control"
-									placeholder="Confirm Password"
+									placeholder="confirm password"
 									value={this.state.confirmpassword}
 									onChange={this.handleInputChange}>
 								</input>
 							</div>
 							<br></br>
 							<div className="text-center">
-							<input type="submit" onClick={this.handleRegisterSubmit} value="Register" />
+							<input type="submit" style={style.btn}  onClick={this.handleRegisterSubmit} value="Register" />
 							</div>
 							<br></br>
 					</form>

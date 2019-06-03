@@ -17,7 +17,7 @@ const style = {
 
     content: {
         backgroundColor: "white",
-        padding: "20px 30px 300px 30px",
+        padding: "20px 30px 50px 30px",
         textAlign: "center"
     },
 
@@ -109,12 +109,14 @@ class Lesson extends Component {
                 </div>
                 <div className="row">
                         <div className="col-12" style={style.content}>
+                        <div className="d-flex flex-wrap justify-content-center">
 
 {this.state.courseArray.map(course => (
     <Course
         id={course.id}
         title={course.courseName}
         handleClick={this.handleClick}
+        img={course.coursePic}
         // description={course.description}
         // numLessons={course.material.length}
     />
@@ -133,6 +135,7 @@ class Lesson extends Component {
                     {{ title: "HTML & CSS", description: "HTML & CSS Description", numLessons: "10" }}
                 /> */}
                 </div>
+            </div>
             </div>
             </div>
             </div>
