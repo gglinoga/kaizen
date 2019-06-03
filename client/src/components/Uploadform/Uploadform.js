@@ -28,7 +28,6 @@ const style = {
 }
 
 
-
 class Uploadform extends Component {
 
     state = {
@@ -39,6 +38,8 @@ class Uploadform extends Component {
         lessonPic: "",
         quiz: "",
         lessonNum: "",
+        lessons: [],
+        courseID: ""
     };
 
     handleInputChange = event => {
@@ -48,11 +49,55 @@ class Uploadform extends Component {
         this.setState({
             [name]: value
         });
-        this.newCourse();
     };
 
     newCourse = () => {
-        fetch("/api/newCourse", {
+        let url = "/api/courses/";
+        fetch(url, {
+            method: 'GET',
+        })
+        .then(res=>{
+            // console.log(res.json())
+            // console.log(res.text())
+            // console.log(res.body)
+            let foo = res.json();
+            foo.then(json => {
+                // console.log(res.json())
+                console.log(json)
+                let match = false;
+
+                for (let i=0; i<json.length; i++){
+                    if (json[i].courseName === this.state.courseName)
+                    {
+                    match = true;
+                    console.log('match')
+                    console.log(match);
+                    this.setState({ courseID: json[i].id })
+                    console.log(this.state.courseID);
+                    alert('You have selected the ' + this.state.courseName + ' course.')
+                    }}
+                
+                if (match === false) {
+                    alert('You have added the ' + this.state.courseName + ' course.')
+                    this.postCourse();
+                    this.setState( {courseID: json[json.length-1].id+1})
+                    console.log(this.state.courseID)
+                }
+                this.allLessons();
+
+            })
+        })
+        .then(error => {
+            if (error) throw error
+        })
+    }
+
+    postCourse = () => {
+        console.log(this.state.courseName)
+        console.log(this.state.coursePic)
+        console.log('post course');
+        let url = "/api/newCourse";
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -60,21 +105,19 @@ class Uploadform extends Component {
             },
             body: JSON.stringify({
                 courseName: this.state.courseName,
-                coursePic: this.state.coursePic,
-                lessonMaterial: this.state.lessonMaterial,
-                textContent: this.state.textContent,
-                lessonPic: this.state.lessonPic,
-                quiz: this.state.quiz,
-                lessonNum: this.state.lessonNum,
+                coursePic: this.state.coursePic
             })
+            
+        }).then(()=>{
+            console.log('posted ' + this.state.courseName)
+        }
+        )
+        .catch(err=>{
+            if (err) throw err
         })
-            .catch(error => {
-                if (error) throw error
-            });
     }
 
     handleNewCourse = event => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
         if (!this.state.courseName) {
             alert(`Course Name is a Required Field!`);
@@ -82,6 +125,35 @@ class Uploadform extends Component {
         if (!this.state.coursePic) {
             alert(`Course Pic is a Required Field!`);
         }
+        else {
+            this.newCourse();
+        }
+    }
+    
+    allLessons = () => {
+        let url = "/api/lesson";
+        console.log("-------------"+ this.state.courseID);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.state.courseID
+            })
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch(err=>{
+            if (err) throw err;
+        });
+    }
+
+    handleNewLesson = event => {
+        // Preventing the default behavior of the form submit (which is to refresh the page)
+        event.preventDefault();
         if (!this.state.lessonMaterial) {
             alert(`Lesson Material is a Required Field!`);
         }
@@ -137,6 +209,8 @@ class Uploadform extends Component {
                                         </input>
                                     </div>
                                 </div>
+
+                                <input type="submit" style={style.btn} onClick={this.handleNewCourse} value="Add Course" />
                             </div>
 
 
@@ -208,7 +282,7 @@ class Uploadform extends Component {
                                 </div>
                             </div>
 
-                            <input type="submit" style={style.btn} onClick={this.handleNewCourse} value="Add Course" />
+                            <input type="submit" style={style.btn} onClick={this.handleNewLesson} value="Add Lesson" />
                         </form>
                     </div>
                 </div>

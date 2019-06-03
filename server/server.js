@@ -92,10 +92,23 @@ app.get('/api/courses', (req, res) => {
             // knex.destroy();
         })
 })
+//one course
+app.get('/api/oneCourse', (req, res) => {
+    knex.select().from('courses').where('courseName', req.params.courseName)
+    .then(function(response, err) {
+        if (err) throw err;
+            console.log(response);
+            res.json(response)
+    })
+    .finally(()=>{
+        console.log('done');
+    });
+})
+
 
 //single course
 app.get('/api/courses/:course', (req, res) => {
-    knex.select().from('courses').where('courseName', req.params.course)
+    knex.select().from('courses').where('courseName', req.params.courseName)
         .then(function (response, err) {
             if (err) throw err;
             console.log(response);
@@ -163,7 +176,7 @@ app.get('/users/currentCourse', (req, res) => {
 })
 
 //add new course
-app.post('api/newCourse', (req, res) => {
+app.post('/api/newCourse', (req, res) => {
     knex('courses').insert({
         courseName: req.body.courseName,
         coursePic: req.body.coursePic
@@ -176,7 +189,7 @@ app.post('api/newCourse', (req, res) => {
 })
 
 //add new lesson
-app.post('api/newLesson', (req, res) => {
+app.post('/api/newLesson', (req, res) => {
     knex('lessons').insert({
         lessonMaterial: req.body.lessonMaterial,
         lessonPic: req.body.lessonPic,
@@ -198,8 +211,8 @@ app.post('/api/lesson', (req, res) => {
     .where('courses.id', req.body.id)
     .then(function (response, err) {
         if (err) throw err;
-        console.log(response);
-        res.json(response)
+        // console.log(response);
+        // res.json(response)
     }).finally(() => {
         console.log("done");
         // knex.destroy();
