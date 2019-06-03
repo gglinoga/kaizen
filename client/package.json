@@ -1,6 +1,7 @@
 {
   "name": "kaizen",
   "version": "0.1.0",
+  "homepage": "https://gglinoga.github.io/kaizen",
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
@@ -9,6 +10,7 @@
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
     "express-session": "^1.16.1",
+    "gh-pages": "^2.0.1",
     "mdbreact": "^4.14.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -21,6 +23,8 @@
     "react-sidebar": "^3.0.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

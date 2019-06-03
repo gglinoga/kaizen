@@ -16,7 +16,6 @@ const style = {
         textAlign: "center", 
         fontSize: "24px"
         // display: "inline-block"
-
     },
 
     img: {
