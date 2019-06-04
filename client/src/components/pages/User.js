@@ -16,7 +16,7 @@ const style = {
     content: {
         backgroundColor: "white",
         padding: "20px 30px 100px 30px",
-        height: "auto",
+        height: "600px",
         align: "center",
     },
 
