@@ -83,7 +83,7 @@ render () {
         <div class="col-4" style={navRight}>
             <a onClick={this.loginEvent} style={a} ><i class="fas fa-sign-in-alt"></i>    </a>
             <a style={a}>|</a>
-            <a href="#" style={a}>     <i class="fas fa-user"></i>    </a>
+            <a href="/user" style={a}>     <i class="fas fa-user"></i>    </a>
             <a style={a}>|</a>
             <a href="/upload" style={a}>     <i class="fas fa-file-upload"></i>     </a>
         </div>
