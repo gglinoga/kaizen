@@ -123,8 +123,6 @@ class Uploadform extends Component {
     }
 
     postCourse = () => {
-        console.log(this.state.courseName)
-        console.log(this.state.coursePic)
         console.log('post course');
         let url = "/api/newCourse";
         fetch(url, {
@@ -162,7 +160,6 @@ class Uploadform extends Component {
     
     allLessons = () => {
         let url = "/api/lesson";
-        console.log("-------------"+ this.state.courseID);
         fetch(url, {
             method: 'POST',
             headers: {
@@ -174,13 +171,10 @@ class Uploadform extends Component {
             })
         })
         .then((response)=>{
-            console.log(response);
             response.json().then((data) => {
                 console.log(data);
                 this.setState({lessons : data})
-                console.log(this.state.lessons)
                 this.setState({lessonNum: this.state.lessons.length+1})
-                console.log(this.state.lessonNum)
             })
         })
         .catch(err=>{
