@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import sample from "../../images/sample.png"
 
 const style = {
 
@@ -25,6 +26,33 @@ const style = {
         color: "white",
         borderRadius: "20px"
     },
+
+    btn2: {
+        backgroundColor: "mediumblue",
+        color: "white",
+        display: "table",
+        margin: "auto",
+        borderRadius: "20px",
+        padding: "5px 10px",
+        textAlign: "center"
+    },
+
+    img: {
+        maxWidth: "400px"
+    },
+
+    title: {
+        backgroundColor: "purple",
+        padding: "5px 5px",
+        borderRadius: "3px",
+        color: "white"
+    },
+
+    center: {
+        textAlign: "center",
+        display: "table",
+        margin: "auto"
+    }
 }
 
 
@@ -36,7 +64,12 @@ class Uploadform extends Component {
         lessonMaterial: "",
         textContent: "",
         lessonPic: "",
-        quiz: "",
+        Question: "",
+        Answer: "",
+        a: "",
+        b: "",
+        c: "",
+        d: "",
         lessonNum: "",
         lessons: [],
         courseID: ""
@@ -176,14 +209,32 @@ class Uploadform extends Component {
 
             <div>
                 <div className="row" style={style.home}>
+
                     <div className="col-2"></div>
+
                     <div className="col-8" style={style.content}>
+                    <h5 style={style.title}>Option A: Add a file</h5>
+
+                        <div className="row">
+                            <div className="col-4">
                         <p>Select a file (.xls or .csv): </p>
                         <input type="file" name="myFile" />
                         <br></br>
                         <br></br>
+                        </div>
+                            <div className="col-8">
+                            <br></br>
+                            <p>Model File (Click to download to your computer)</p>
+                            <a href={sample}>
+                            <img src={sample} style={style.img} alt="sample"/>
+                            </a>
 
-
+                            </div>
+                            </div>
+                            <br></br>
+                            <br></br>
+                        <h5 style={style.title}>Option B: Add Course Using Our Form</h5>
+                        <h5>Step 1: Add Course</h5>
                         <form>
                             <div className="form-row">
                                 <div className="col">
@@ -214,13 +265,21 @@ class Uploadform extends Component {
                                         </input>
                                     </div>
                                 </div>
-
-                                <input type="submit" style={style.btn} onClick={this.handleNewCourse} value="Add Course" />
                             </div>
+                            <div className="row">
+                                <div className="col-2"></div>
+                                <div className="col-8">
+                                <input type="submit" style={style.btn2} onClick={this.handleNewCourse} value="Add Course " />
+                                <h7 style={style.center}><i>(Must Add Course First Before Adding Lessons)</i></h7>
+                                </div>
+                                </div>
+                                <hr></hr>
+
 
 
                             <div className="form-row">
                                 <div className="col">
+                                <h5>Step 2: Add Lessons</h5>
                                     <div className="form-group">
                                         <label for="lessonMaterial">Lesson Title</label>
                                         <input
@@ -271,18 +330,65 @@ class Uploadform extends Component {
                             </div>
 
                             <div className="form-row">
+                            <label for="quiz">Quiz</label>
+                                <div className="col-1"></div>
                                 <div className="col">
                                     <div className="form-group">
-                                        <label for="quiz">Quiz</label>
                                         <input
                                             type="text"
-                                            id="quiz"
-                                            name="quiz"
+                                            id="question"
+                                            name="question"
                                             class="form-control"
-                                            placeholder="Quiz"
-                                            value={this.state.quiz}
+                                            placeholder="Question"
+                                            value={this.state.question}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <input
+                                            type="text"
+                                            id="answer"
+                                            name="answer"
+                                            class="form-control"
+                                            placeholder="Answer"
+                                            value={this.state.Answer}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+                                        <input
+                                            type="text"
+                                            id="a"
+                                            name="a"
+                                            class="form-control"
+                                            placeholder="a"
+                                            value={this.state.a}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+                                        <input
+                                            type="text"
+                                            id="b"
+                                            name="b"
+                                            class="form-control"
+                                            placeholder="b"
+                                            value={this.state.b}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+                                        <input
+                                            type="text"
+                                            id="c"
+                                            name="c"
+                                            class="form-control"
+                                            placeholder="c"
+                                            value={this.state.c}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+                                        <input
+                                            type="text"
+                                            id="d"
+                                            name="d"
+                                            class="form-control"
+                                            placeholder="d"
+                                            value={this.state.d}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+
                                     </div>
                                 </div>
                             </div>
