@@ -190,11 +190,15 @@ app.post('/api/newCourse', (req, res) => {
 
 //add new lesson
 app.post('/api/newLesson', (req, res) => {
+    console.log(req.body);
     knex('lessons').insert({
         lessonMaterial: req.body.lessonMaterial,
         lessonPic: req.body.lessonPic,
+        courseID: req.body.courseID,
         textContent: req.body.textContent,
-        quiz: req.body.quiz
+        quiz: req.body.quiz,
+        lessonDescription: req.body.lessonDescription,
+        lessonNum: req.body.lessonNum
     })
     .then((response, err) => {
         if (err) throw err;

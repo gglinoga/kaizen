@@ -64,15 +64,16 @@ class Uploadform extends Component {
         lessonMaterial: "",
         textContent: "",
         lessonPic: "",
-        Question: "",
-        Answer: "",
+        question: "",
+        answer: "",
         a: "",
         b: "",
         c: "",
         d: "",
-        lessonNum: "",
+        lessonNum: 1,
         lessons: [],
-        courseID: ""
+        courseID: "",
+        lessonButton: false
     };
 
     handleInputChange = event => {
@@ -189,6 +190,40 @@ class Uploadform extends Component {
         });
     }
 
+    postLesson = () => {
+        this.setState({lessonButton: true})
+
+        let url = "/api/newLesson";
+        let quizJSON = `{"question":"${this.state.question}", "answer": "${this.state.answer}", "choices": ["${this.state.a}", "${this.state.b}", "${this.state.c}", "${this.state.d}"]}`
+        console.log(quizJSON);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                lessonMaterial: this.state.lessonMaterial,
+                lessonPic: this.state.lessonPic,
+                courseID: this.state.courseID,
+                textContent: this.state.textContent,
+                quiz: quizJSON,
+                lessonDescription: this.state.lessonMaterial,
+                lessonNum: this.state.lessonNum
+            })
+        })
+        .then((req, response)=>{
+            console.log(req.body)
+            console.log(response);
+            // response.json().then((data)=> {
+            //     console.log(data);
+                
+            // })
+        })
+    }
+    
+    
+
     handleNewLesson = event => {
         // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
@@ -198,8 +233,11 @@ class Uploadform extends Component {
         if (!this.state.textContent) {
             alert(`Course Name is Required Field!`);
         }
-        if (!this.state.quiz) {
-            alert(`Quiz is Required Field!`);
+        // if (!this.state.quiz) {
+        //     alert(`Quiz is Required Field!`);
+        // }
+        if (!this.state.lessonButton){
+        this.postLesson();
         }
     }
 
@@ -349,7 +387,7 @@ class Uploadform extends Component {
                                             name="answer"
                                             class="form-control"
                                             placeholder="Answer"
-                                            value={this.state.Answer}
+                                            value={this.state.answer}
                                             onChange={this.handleInputChange}>
                                         </input>
                                         <input
