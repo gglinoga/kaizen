@@ -9,8 +9,7 @@ class LessonList extends Component {
 render() {
     return(
     <div>
-        <p>Lesson {this.props.lessonNum}</p>
-        <p>{this.props.lessonName}</p>
+        <p>Lesson {this.props.lessonNum}:    {this.props.lessonName}</p>
     </div>
     )
 }

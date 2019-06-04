@@ -307,7 +307,7 @@ class Uploadform extends Component {
 
                                 <div className="form-row">
                                     <td>
-                                        <h3>Lessons included in course</h3>
+                                        <h3>{this.state.courseName} lessons</h3>
                                     {this.state.lessons.map(lesson => (
                                         <LessonList
                                             lessonName={lesson.lessonMaterial}
