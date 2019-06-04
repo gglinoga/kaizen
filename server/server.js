@@ -88,7 +88,7 @@ app.get('/api/courses', (req, res) => {
             console.log(response);
             res.json(response)
         }).finally(() => {
-            console.log('done');
+            console.log('all courses done');
             // knex.destroy();
         })
 })
@@ -212,9 +212,9 @@ app.post('/api/lesson', (req, res) => {
     .then(function (response, err) {
         if (err) throw err;
         // console.log(response);
-        // res.json(response)
+        res.json(response)
     }).finally(() => {
-        console.log("done");
+        console.log("lesson done");
         // knex.destroy();
     });
 })

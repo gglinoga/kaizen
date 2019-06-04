@@ -143,8 +143,13 @@ class Uploadform extends Component {
                 id: this.state.courseID
             })
         })
-        .then((res)=>{
-            console.log(res);
+        .then((response)=>{
+            console.log(response);
+            response.json().then((data) => {
+                console.log(data);
+                this.setState({lessons : data})
+                console.log(this.state.lessons)
+            })
         })
         .catch(err=>{
             if (err) throw err;
