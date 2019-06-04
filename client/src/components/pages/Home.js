@@ -46,7 +46,7 @@ class Home extends Component {
         modalOn: false,
         apiResponse: "",
         courseArray: [],
-        login: false
+        login: true
 
     }
     showModal = () => {
