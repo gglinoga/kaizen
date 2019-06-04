@@ -3,7 +3,7 @@ const options = {
     connection: {
         host: 'localhost',
         user: 'admin',
-        password: 'password',
+        password: 'asdfasdf',
         database: 'kaizen_db'
     }
 };

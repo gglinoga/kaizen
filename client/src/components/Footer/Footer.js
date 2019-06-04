@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 const style = {
     footer: {
@@ -21,12 +22,23 @@ const style = {
     }
 }
 
+const HoverHelp = styled.p`
+    color: white;
+    :hover {
+        color: white;
+        cursor: pointer;
+    }
+}
+`
+
 const Footer = () => (
     <div class="Footer navbar-fixed-bottom" style={style.footer}>
     <div class="row">
         <div class="col-9"></div>
         <div class="col-3">
-            <a href="#" style={style.a}><i className="far fa-comment-dots"></i></a>
+
+        <HoverHelp><a href="#" style={style.a}><i className="far fa-comment-dots"></i></a></HoverHelp>
+
         </div>
         </div>
 
