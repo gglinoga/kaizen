@@ -12,7 +12,7 @@ const style = {
         fontSize: "1.75em",
         position: "absolute",
         top: "110px",
-        marginBotom: "50px"
+        marginBottom: "50px"
     },
 
 }
