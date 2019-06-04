@@ -70,7 +70,7 @@ class Uploadform extends Component {
         b: "",
         c: "",
         d: "",
-        lessonNum: 1,
+        lessonNum: "",
         lessons: [],
         courseID: "",
         lessonButton: false
@@ -183,6 +183,8 @@ class Uploadform extends Component {
                 console.log(data);
                 this.setState({lessons : data})
                 console.log(this.state.lessons)
+                this.setState({lessonNum: this.state.lessons.length+1})
+                console.log(this.state.lessonNum)
             })
         })
         .catch(err=>{
@@ -215,6 +217,7 @@ class Uploadform extends Component {
         .then((req, response)=>{
             console.log(req.body)
             console.log(response);
+            alert(`Congratulations, you have successfully added the lesson ${this.state.lessonMaterial}.`)
             // response.json().then((data)=> {
             //     console.log(data);
                 
