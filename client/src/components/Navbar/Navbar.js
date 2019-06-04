@@ -19,13 +19,12 @@ const navLeft = {
 }
 
 const navCenter = {
-    margin: "auto",
     color: "white",
     textAlign: "center",
-    fontSize: "24px",
+    fontSize: "32px",
     display: "table",
     margin: "auto"
-
+    
 }
 
 const a = {
@@ -79,7 +78,7 @@ render () {
                 <a href="/"style={a}><i class="fas fa-home"></i>   </a>
         </div>
         <div class="col-4" style={navCenter}>
-                <h2><i class="fas fa-book-reader"></i></h2>
+                <p style={navCenter}><i class="fas fa-book-reader"></i></p>
         </div>
         <div class="col-4" style={navRight}>
             <a onClick={this.loginEvent} style={a} ><i class="fas fa-sign-in-alt"></i>    </a>
