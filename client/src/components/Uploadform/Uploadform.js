@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import sample from "../../images/sample.png"
+import sample from "../../images/sample.png";
+import LessonList from "../LessonList/LessonList";
 
 const style = {
 
@@ -304,6 +305,17 @@ class Uploadform extends Component {
                                 </div>
                                 <hr></hr>
 
+                                <div className="form-row">
+                                    <td>
+                                        <h3>{this.state.courseName} lessons</h3>
+                                    {this.state.lessons.map(lesson => (
+                                        <LessonList
+                                            lessonName={lesson.lessonMaterial}
+                                            lessonNum={lesson.lessonNum}
+                                            />
+                                    ))}
+                                    </td>
+                                </div>
 
 
                             <div className="form-row">

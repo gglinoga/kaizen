@@ -39,26 +39,20 @@ function Sidenav2() {
                     <NavItem eventKey="completedLessons">
                         
                         <NavIcon><i className="far fa-check-square"></i></NavIcon>
-                        <NavText>Completed</NavText>
+                        <NavText>All lessons</NavText>
                         <NavItem eventKey="lesson1">
                             <NavText>
-                            Lesson 1
+                        
                         </NavText>
                         </NavItem>
-                        <NavItem eventKey="lesson2">
+                        {/* <NavItem eventKey="lesson2">
                         <NavText>
                             Lesson 2
                         </NavText>
-                        </NavItem>
+                        </NavItem> */}
 
                     </NavItem>
 
-                    <NavItem eventKey="currentLesson">
-                        <NavIcon><i className="fas fa-spinner"></i></NavIcon>
-                        <NavText>Current Lesson (Lesson 3) </NavText>
-                        <NavItem eventKey="charts/linechart">
-                        </NavItem>
-                    </NavItem>
 
                     
                 </SideNav.Nav>
