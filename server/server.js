@@ -213,6 +213,7 @@ app.post('/api/lesson', (req, res) => {
         'courses.id': "lessons.courseID"
     })
     .where('courses.id', req.body.id)
+    .orderBy('lessons.lessonNum')
     .then(function (response, err) {
         if (err) throw err;
         // console.log(response);

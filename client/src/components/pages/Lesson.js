@@ -77,8 +77,6 @@ class Lesson extends Component {
         })
     }
 
-// If getLesson is getting the json data from the table like intend, we setState.
-
 
     getLesson= () => {
         console.log('GL ' + this.state.courseID)
@@ -132,7 +130,6 @@ class Lesson extends Component {
 
 
     render() {
-        // console.log(this.state.quizzes[this.state.i].choices)
         return (
             <div>
                 <Navbar courseTitle={this.state.courseName} />

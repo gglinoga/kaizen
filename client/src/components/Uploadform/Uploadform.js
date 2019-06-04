@@ -91,12 +91,8 @@ class Uploadform extends Component {
             method: 'GET',
         })
         .then(res=>{
-            // console.log(res.json())
-            // console.log(res.text())
-            // console.log(res.body)
             let foo = res.json();
             foo.then(json => {
-                // console.log(res.json())
                 console.log(json)
                 let match = false;
 
@@ -127,8 +123,6 @@ class Uploadform extends Component {
     }
 
     postCourse = () => {
-        console.log(this.state.courseName)
-        console.log(this.state.coursePic)
         console.log('post course');
         let url = "/api/newCourse";
         fetch(url, {
@@ -166,7 +160,6 @@ class Uploadform extends Component {
     
     allLessons = () => {
         let url = "/api/lesson";
-        console.log("-------------"+ this.state.courseID);
         fetch(url, {
             method: 'POST',
             headers: {
@@ -178,13 +171,10 @@ class Uploadform extends Component {
             })
         })
         .then((response)=>{
-            console.log(response);
             response.json().then((data) => {
                 console.log(data);
                 this.setState({lessons : data})
-                console.log(this.state.lessons)
                 this.setState({lessonNum: this.state.lessons.length+1})
-                console.log(this.state.lessonNum)
             })
         })
         .catch(err=>{
@@ -218,27 +208,26 @@ class Uploadform extends Component {
             console.log(req.body)
             console.log(response);
             alert(`Congratulations, you have successfully added the lesson ${this.state.lessonMaterial}.`)
-            // response.json().then((data)=> {
-            //     console.log(data);
-                
-            // })
         })
     }
     
     
 
     handleNewLesson = event => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
         event.preventDefault();
         if (!this.state.lessonMaterial) {
             alert(`Lesson Material is a Required Field!`);
         }
         if (!this.state.textContent) {
-            alert(`Course Name is Required Field!`);
+            alert(`Course Name is a Required Field!`);
         }
-        // if (!this.state.quiz) {
-        //     alert(`Quiz is Required Field!`);
-        // }
+        if (!this.state.question) {
+            alert(`Quiz question is a Required Field!`);
+        }
+        if (!this.state.answer) {
+            alert(`Quiz answer is a Required Field!`);
+        }
+
         if (!this.state.lessonButton){
         this.postLesson();
         }
@@ -246,7 +235,6 @@ class Uploadform extends Component {
 
     render() {
         return (
-
 
             <div>
                 <div className="row" style={style.home}>
