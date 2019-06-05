@@ -97,7 +97,6 @@ class Lesson extends Component {
         return (
             <div>
                 <Navbar courseTitle={this.state.courseName} />
-                <Sidenav />
                 <div style={style.home}>
                 <div className="row"></div>
                 <div className="row">

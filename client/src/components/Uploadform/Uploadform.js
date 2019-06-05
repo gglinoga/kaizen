@@ -285,8 +285,13 @@ class Uploadform extends Component {
         }
 
         if (!this.state.lessonButton) {
-            this.postLesson();
+               this.postAndAllLessons();
         }
+    }
+
+    postAndAllLessons = ()=> {
+        this.postLesson();
+        setTimeout(this.allLessons, 500);
     }
 
     render() {
