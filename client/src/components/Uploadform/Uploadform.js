@@ -25,7 +25,12 @@ const style = {
     btn: {
         backgroundColor: "mediumblue",
         color: "white",
-        borderRadius: "20px"
+        borderRadius: "20px",
+        textAlign: "center",
+        display: "table",
+        margin: "auto",
+        padding: "5px 10px",
+
     },
 
     btn2: {
@@ -60,6 +65,10 @@ const style = {
         borderRadius: "5px",
         text: "center",
         color: "white"
+    },
+
+    left: {
+        borderLeft: "silver 2px solid"
     }
 }
 
@@ -310,7 +319,7 @@ class Uploadform extends Component {
 
                     <div className="col-8" style={style.content}>
 
-                        <h5 style={style.title}>Option A: Upload Course (.xls or .csv format only)</h5>
+                        <h5 style={style.title}>Option A: Upload File (.xls or .csv format only)</h5>
 
                         <div className="row">
                             <div className="col-4">
@@ -321,7 +330,7 @@ class Uploadform extends Component {
                             </div>
                             <div className="col-8">
                                 <br></br>
-                                <p>Model File (Click to download to your computer)</p>
+                                <p>Template (Click to download)</p>
                                 <a href={sample}>
                                     <img src={sample} style={style.img} alt="sample" />
                                 </a>
@@ -330,224 +339,227 @@ class Uploadform extends Component {
                         </div>
                         <br></br>
                         <br></br>
+
+
                         <h5 style={style.title}>Option B: Use Our Form</h5>
-                        <h5><u>Step 1</u></h5>
-                        <h5><i>Add New Course</i></h5>
-                        <form>
-                            <div className="form-row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label for="CourseName">Course Title</label>
-                                        <input
-                                            type="text"
-                                            id="courseName"
-                                            name="courseName"
-                                            class="form-control"
-                                            placeholder="Enter new or existing course title"
-                                            value={this.state.courseName}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                    </div>
-                                </div>
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label for="coursePic">Course Picture</label>
-                                        <input
-                                            type="text"
-                                            id="coursePic"
-                                            name="coursePic"
-                                            class="form-control"
-                                            placeholder="Enter link for course thumbnail"
-                                            value={this.state.coursePic}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-2"></div>
-                                <div className="col-8">
-                                    <input type="submit" style={style.btn2} onClick={this.handleNewCourse} value="Add New Course " />
-                                    <h7 style={style.center}><i>(*Must* Add Course First Before Adding Lessons)</i></h7>
-                                </div>
-                            </div>
-                            <br></br>
+                        <p></p>
 
-                        <h5><i>Add Lesson to Existing Course</i></h5>
-                        <form>
-                            <div className="form-row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label for="CourseName">Course Title</label>
-                                        <input
-                                            type="text"
-                                            id="courseName"
-                                            name="courseName"
-                                            class="form-control"
-                                            placeholder="Enter new or existing course title"
-                                            value={this.state.courseName}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <div className="row">
-                                <div className="col-2"></div>
-                                <div className="col-8">
-                                    <input type="submit" style={style.btn2}
-                                    onClick={this.handleExistingCourse}
-                                    value="Add to Existing Course " />
-                                    <h7 style={style.center}></h7>
-                                </div>
-                            </div>
-                            <br></br>
+                            <div className="col-6 text-center">
+                                <h5><i>Add New Course</i></h5>
+                                <form>
+                                    <div className="form-row">
+                                            <div className="form-group">
+                                                <label for="CourseName"></label>
+                                                <input
+                                                    type="text"
+                                                    id="courseName"
+                                                    name="courseName"
+                                                    class="form-control"
+                                                    placeholder="enter course title"
+                                                    value={this.state.courseName}
+                                                    onChange={this.handleInputChange}>
+                                                </input>
+                                            </div>
+                                        <div className="col">
+                                            <div className="form-group">
+                                                <label for="coursePic"></label>
+                                                <input
+                                                    type="text"
+                                                    id="coursePic"
+                                                    name="coursePic"
+                                                    class="form-control"
+                                                    placeholder="enter url for thumbnail"
+                                                    value={this.state.coursePic}
+                                                    onChange={this.handleInputChange}>
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
 
-
-
-
-                            <div className="form-row" style={style.courseName}>
-                                <div className="col-4"></div>
-                                <div className="col-4 text-center">
-                                    <div className="row"></div>
-                                    <h3><u>{this.state.courseName}</u></h3>
-                                    <img src={this.state.coursePic}></img>
-                                    {this.state.lessons.map(lesson => (
-                                        <LessonList
-                                            lessonName={lesson.lessonMaterial}
-                                            lessonNum={lesson.lessonNum}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                            <br></br>
-
-
-                            <div className="form-row">
-                                <div className="col">
-                                    <h5>Step 2: Add Lessons</h5>
-                                    <div className="form-group">
-                                        <label for="lessonMaterial">Lesson Title</label>
-                                        <input
-                                            type="text"
-                                            id="lessonMaterial"
-                                            name="lessonMaterial"
-                                            class="form-control"
-                                            placeholder="Enter lesson title"
-                                            value={this.state.lessonMaterial}
-                                            onChange={this.handleInputChange}>
-                                        </input>
+                                <div className="row">
+                                    <div className="col-2"></div>
+                                    <div className="col-8">
+                                        <input type="submit" style={style.btn2} onClick={this.handleNewCourse} value="Add New Course " />
+                                        <h7 style={style.center}></h7>
                                     </div>
                                 </div>
+                                <br></br>
                             </div>
 
-                            <div className="form-row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label for="textContent">Lesson Content</label>
-                                        <input
-                                            type="text"
-                                            id="textContent"
-                                            name="textContent"
-                                            class="form-control"
-                                            placeholder="Enter lesson content. Type \n at the end of each paragraph."
-                                            value={this.state.textContent}
-                                            onChange={this.handleInputChange}>
-                                        </input>
+
+                            <div className="col-6 text-center" style={style.left}>
+                                <h5><i>Select Existing Course</i></h5>
+                                <form>
+                                    <div className="form-row">
+                                        <div className="col">
+                                            <div className="form-group">
+                                                <label for="CourseName"></label>
+                                                <input
+                                                    type="text"
+                                                    id="courseName"
+                                                    name="courseName"
+                                                    class="form-control"
+                                                    placeholder="enter existing course title"
+                                                    value={this.state.courseName}
+                                                    onChange={this.handleInputChange}>
+                                                </input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div className="row">
+                                    <div className="col-2"></div>
+                                    <div className="col-8">
+                                        <input type="submit" style={style.btn2}
+                                            onClick={this.handleExistingCourse}
+                                            value="Select Existing Course " />
+                                        <h7 style={style.center}></h7>
                                     </div>
                                 </div>
+                                <br></br>
+                                <br></br>
                             </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 text-center">
+                                <h7><i>* Add or Select Course Before Adding Lessons</i></h7>
+                            </div>
+                        </div>
 
-                            <div className="form-row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label for="lessonPic">Lesson Image</label>
-                                        <input
-                                            type="text"
-                                            id="lessonPic"
-                                            name="lessonPic"
-                                            class="form-control"
-                                            placeholder="Type url for lesson image (Optional)"
-                                            value={this.state.lessonPic}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                    </div>
+                        <div className="form-row" style={style.courseName}>
+                            <div className="col-4"></div>
+                            <div className="col-4 text-center">
+                                <div className="row"></div>
+                                <h3><u>{this.state.courseName}</u></h3>
+                                {this.state.lessons.map(lesson => (
+                                    <LessonList
+                                        lessonName={lesson.lessonMaterial}
+                                        lessonNum={lesson.lessonNum}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                        <br></br>
+
+
+
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="form-row">
-                                <label for="quiz">Quiz</label>
-                                <div className="col-1"></div>
-                                <div className="col">
-                                    <div className="form-group">
-                                        <input
-                                            type="text"
-                                            id="question"
-                                            name="question"
-                                            class="form-control"
-                                            placeholder="Question"
-                                            value={this.state.question}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                        <p></p>
-                                        <input
-                                            type="text"
-                                            id="answer"
-                                            name="answer"
-                                            class="form-control"
-                                            placeholder="Answer"
-                                            value={this.state.answer}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                        <p></p>
-                                        <input
-                                            type="text"
-                                            id="a"
-                                            name="a"
-                                            class="form-control"
-                                            placeholder="a"
-                                            value={this.state.a}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                        <p></p>
-                                        <input
-                                            type="text"
-                                            id="b"
-                                            name="b"
-                                            class="form-control"
-                                            placeholder="b"
-                                            value={this.state.b}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                        <p></p>
-                                        <input
-                                            type="text"
-                                            id="c"
-                                            name="c"
-                                            class="form-control"
-                                            placeholder="c"
-                                            value={this.state.c}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-                                        <p></p>
-                                        <input
-                                            type="text"
-                                            id="d"
-                                            name="d"
-                                            class="form-control"
-                                            placeholder="d"
-                                            value={this.state.d}
-                                            onChange={this.handleInputChange}>
-                                        </input>
-
-                                    </div>
+                        <div className="form-row">
+                            <div className="col">
+                                <div className="form-group">
+                                    <label for="textContent">Lesson Content</label>
+                                    <input
+                                        type="text"
+                                        id="textContent"
+                                        name="textContent"
+                                        class="form-control"
+                                        placeholder="enter lesson content. Type \n at the end of each paragraph."
+                                        value={this.state.textContent}
+                                        onChange={this.handleInputChange}>
+                                    </input>
                                 </div>
                             </div>
+                        </div>
 
-                            <input type="submit" style={style.btn} onClick={this.handleNewLesson} value="Add Lesson" />
-                        </form>
+                        <div className="form-row">
+                            <div className="col">
+                                <div className="form-group">
+                                    <label for="lessonPic">Image</label>
+                                    <input
+                                        type="text"
+                                        id="lessonPic"
+                                        name="lessonPic"
+                                        class="form-control"
+                                        placeholder="enter url for lesson image (Optional)"
+                                        value={this.state.lessonPic}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                        <div className="col">
+                                <div className="form-group">
+                            <label for="quiz">Quiz</label>
+                            <div className="row">
+                            <div className="col-1"></div>
+                            <div className="col">
+                                    <input
+                                        type="text"
+                                        id="question"
+                                        name="question"
+                                        class="form-control"
+                                        placeholder="question"
+                                        value={this.state.question}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                    <p></p>
+                                    <input
+                                        type="text"
+                                        id="answer"
+                                        name="answer"
+                                        class="form-control"
+                                        placeholder="enter correct answer"
+                                        value={this.state.answer}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                    <p></p>
+                                    <input
+                                        type="text"
+                                        id="a"
+                                        name="a"
+                                        class="form-control"
+                                        placeholder="enter answer a"
+                                        value={this.state.a}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                    <p></p>
+                                    <input
+                                        type="text"
+                                        id="b"
+                                        name="b"
+                                        class="form-control"
+                                        placeholder="enter answer b"
+                                        value={this.state.b}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                    <p></p>
+                                    <input
+                                        type="text"
+                                        id="c"
+                                        name="c"
+                                        class="form-control"
+                                        placeholder="enter answer c"
+                                        value={this.state.c}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+                                    <p></p>
+                                    <input
+                                        type="text"
+                                        id="d"
+                                        name="d"
+                                        class="form-control"
+                                        placeholder="enter answer d"
+                                        value={this.state.d}
+                                        onChange={this.handleInputChange}>
+                                    </input>
+</div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" style={style.btn} onClick={this.handleNewLesson} value="Add Lesson" />
                     </div>
+
                 </div>
+
             </div>
         )
     }
