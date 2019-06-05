@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import LessonList from "../LessonList/LessonList";
 
 const style = {
 
@@ -18,7 +19,10 @@ const style = {
 }
 
 
-function Sidenav2() {
+class Sidenav extends Component {
+
+
+render() {
     return (
         <div className="container">
             <SideNav style={style.one}
@@ -42,7 +46,11 @@ function Sidenav2() {
                         <NavText>All lessons</NavText>
                         <NavItem eventKey="lesson1">
                             <NavText>
-                        
+                            {this.props.lessons.map(lesson => (
+                                        <LessonList
+                                            lessonName={lesson.lessonMaterial}
+                                            lessonNum={lesson.lessonNum}
+                                            />))}
                         </NavText>
                         </NavItem>
                         {/* <NavItem eventKey="lesson2">
@@ -59,6 +67,7 @@ function Sidenav2() {
             </SideNav>
         </div>
     )
-}
 
-export default Sidenav2;
+}
+}
+export default Sidenav;

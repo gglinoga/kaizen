@@ -46,7 +46,9 @@ class Lesson extends Component {
         question: "",
         jsonS: {},
         load: false,
-        lessonCount: ""
+        lessonCount: "",
+        lessonNum: "",
+        lessons: []
     };
 
 
@@ -95,7 +97,7 @@ class Lesson extends Component {
             foo.then( (json)=> {
                 console.log(json);
                 console.log(json[0].courseName)
-
+                this.setState({lessons: json})
                 this.setState({courseName: json[this.state.i].courseName}) 
                 this.setState({lessonNames: json[this.state.i].lessonMaterial})
                 this.setState({lessonMaterial: json[this.state.i].textContent})
@@ -103,6 +105,7 @@ class Lesson extends Component {
                 this.setState(({choices: json[this.state.i].quiz.choices}))
                 this.setState(({question: json[this.state.i].quiz.question}))
                 this.setState({lessonPic: json[this.state.i].lessonPic})
+                this.setState({lessonNum: json[this.state.i].lessonNum})
                 let length = json.length
                 console.log(length)
                 this.setState({lessonCount: length})
@@ -132,9 +135,13 @@ class Lesson extends Component {
     render() {
         return (
             <div>
-                <Navbar courseTitle={this.state.courseName} />
+                <Navbar courseTitle={this.state.courseName}
+                 />
                 <div className="container">
-                    <Sidenav />
+                    <Sidenav 
+                        lessons={this.state.lessons}
+              
+                    />
                     <div className="row">
                         <div className="col-2"></div>
                         <div className="col-8" style={style.content}>
