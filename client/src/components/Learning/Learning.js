@@ -49,11 +49,11 @@ class Learning extends Component {
     }
 
     handleWrong = () => {
-        alert("u wrong")
+        alert("Incorrect, please try again.")
     }
 
     handleCorrect = () => {
-        alert("u correct")
+        alert("You are correct!  Press Next Page to continue.")
         document.getElementById("nextPage").style.display="inline"; // no
     }
 

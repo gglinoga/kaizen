@@ -119,7 +119,7 @@ class Uploadform extends Component {
                     let match = false;
 
                     for (let i = 0; i < json.length; i++) {
-                        if (json[i].courseName === this.state.courseName) {
+                        if (json[i].courseName === this.state.courseName.toLowerCase()) {
                             match = true;
                             console.log('match')
                             console.log(match);
@@ -160,7 +160,7 @@ class Uploadform extends Component {
                     let match = false;
 
                     for (let i = 0; i < json.length; i++) {
-                        if (json[i].courseName === this.state.courseName) {
+                        if (json[i].courseName === this.state.courseName.toLowerCase()) {
                             match = true;
                             console.log('match')
                             console.log(match);
@@ -259,7 +259,7 @@ class Uploadform extends Component {
     }
 
     postLesson = () => {
-        this.setState({ lessonButton: true })
+        // this.setState({ lessonButton: true })
 
         let url = "/api/newLesson";
         let quizJSON = `{"question":"${this.state.question}", "answer": "${this.state.answer}", "choices": ["${this.state.a}", "${this.state.b}", "${this.state.c}", "${this.state.d}"]}`
@@ -305,8 +305,13 @@ class Uploadform extends Component {
         }
 
         if (!this.state.lessonButton) {
-            this.postLesson();
+            this.postAndAllLesson();
         }
+    }
+
+    postAndAllLesson = () => {
+        this.postLesson();
+        setTimeout(this.allLessons, 500)
     }
 
     render() {
