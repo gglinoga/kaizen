@@ -17,8 +17,9 @@ const style = {
 
     content: {
         backgroundColor: "white",
-        padding: "20px 30px 50px 30px",
-        textAlign: "center"
+        padding: "0px 30px 100px 30px",
+        minHeight: "1200px",
+        textAlign: "center",
     },
 
     description: {

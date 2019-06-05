@@ -6,17 +6,18 @@ import Sidenav from '../Sidenav/Sidenav';
 const style = {
 
     home: {
-        backgroundColor: "white",
-        fontFamily: "'Questrial', sans-serif",
-        marginTop: "10px",
-        margin: "auto",
-        display: "table",
+        backgroundColor: "silver",
+        height: "auto",
+        width: "100%",
+        position: "absolute",
+        zIndex: -1
     },
 
     content: {
         backgroundColor: "white",
-        padding: "0px 30px 100px 30px"
-
+        padding: "0px 30px 100px 30px",
+        height: "1000px",
+        align: "center",
     },
 
     row1: {
@@ -134,7 +135,7 @@ class Lesson extends Component {
 
     render() {
         return (
-            <div>
+            <div style={style.home}>
                 <Navbar courseTitle={this.state.courseName}
                  />
                 <div className="container">
