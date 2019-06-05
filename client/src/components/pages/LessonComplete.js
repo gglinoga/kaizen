@@ -97,13 +97,12 @@ class Lesson extends Component {
         return (
             <div>
                 <Navbar courseTitle={this.state.courseName} />
-                <Sidenav />
                 <div style={style.home}>
                 <div className="row"></div>
                 <div className="row">
                         <div className="col-2"></div>
                         <div className="col-8" style={style.content}>
-                        <h2>Good job completing the course! Here are some other we would recommend.</h2>
+                        <h2>Good job completing the course! Here are additional courses we recommend:</h2>
 
                             <div className="row" style={style.description}>
                 </div>

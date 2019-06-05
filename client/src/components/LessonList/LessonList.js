@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 
 class LessonList extends Component {
-    state = {
-        lessonName: "",
-        lessonNum: ""
-    }
+  
 
 render() {
     return(
