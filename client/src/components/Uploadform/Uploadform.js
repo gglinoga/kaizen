@@ -69,6 +69,10 @@ const style = {
 
     left: {
         borderLeft: "silver 2px solid"
+    },
+
+    img2: {
+        maxWidth: "150px"
     }
 }
 
@@ -118,7 +122,10 @@ class Uploadform extends Component {
                             match = true;
                             console.log('match')
                             console.log(match);
-                            this.setState({ courseID: json[i].id })
+                            this.setState({ 
+                                courseID: json[i].id,
+                                coursePic: json[i].coursePic
+                             })
                             console.log(this.state.courseID);
                             alert('You have selected the ' + this.state.courseName + ' course.')
                         }
@@ -156,7 +163,10 @@ class Uploadform extends Component {
                             match = true;
                             console.log('match')
                             console.log(match);
-                            this.setState({ courseID: json[i].id })
+                            this.setState({ 
+                                courseID: json[i].id,
+                                coursePic: json[i].coursePic
+                             })
                             console.log(this.state.courseID);
                             alert('You have selected the ' + this.state.courseName + ' course.')
                         }
@@ -422,7 +432,8 @@ class Uploadform extends Component {
                             <div className="col-4 text-center">
                                 <div className="row"></div>
                                 <h3><u>{this.state.courseName}</u></h3>
-                                <img src={this.state.coursePic}></img>
+                                <img src={this.state.coursePic} style={style.img2}></img>
+                                <br/>
                                 {this.state.lessons.map(lesson => (
                                     <LessonList
                                         lessonName={lesson.lessonMaterial}
