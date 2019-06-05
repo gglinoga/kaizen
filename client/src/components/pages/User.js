@@ -97,7 +97,6 @@ class User extends Component {
                                         <div className="col-12">
                                             <div className="d-flex flex-wrap justify-content-center text-center">
                                                 <p style={style.title}>Courses Completed</p>
-ß
 
                                                 <Course
                                                     title='javascript'
