@@ -14,7 +14,12 @@ const style = {
         position: "absolute",
         top: "110px",
         marginBottom: "50px"
+        
     },
+
+    lesson: {
+        width: "400px"
+    }
 
 }
 
@@ -45,7 +50,7 @@ render() {
                         <NavIcon><i className="far fa-check-square"></i></NavIcon>
                         <NavText>All lessons</NavText>
                         <NavItem eventKey="lesson1">
-                            <NavText>
+                            <NavText style={style.lesson}>
                             {this.props.lessons.map(lesson => (
                                         <LessonList
                                             lessonName={lesson.lessonMaterial}
