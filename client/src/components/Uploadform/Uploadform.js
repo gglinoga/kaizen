@@ -53,6 +53,13 @@ const style = {
         textAlign: "center",
         display: "table",
         margin: "auto"
+    },
+
+    courseName: {
+        backgroundImage: "linear-gradient(to bottom, blue, red)",
+        borderRadius: "5px",
+        text: "center",
+        color: "white"
     }
 }
 
@@ -91,36 +98,74 @@ class Uploadform extends Component {
         fetch(url, {
             method: 'GET',
         })
-        .then(res=>{
-            let foo = res.json();
-            foo.then(json => {
-                console.log(json)
-                let match = false;
+            .then(res => {
+                let foo = res.json();
+                foo.then(json => {
+                    console.log(json)
+                    let match = false;
 
-                for (let i=0; i<json.length; i++){
-                    if (json[i].courseName === this.state.courseName)
-                    {
-                    match = true;
-                    console.log('match')
-                    console.log(match);
-                    this.setState({ courseID: json[i].id })
-                    console.log(this.state.courseID);
-                    alert('You have selected the ' + this.state.courseName + ' course.')
-                    }}
-                
-                if (match === false) {
-                    alert('You have added the ' + this.state.courseName + ' course.')
-                    this.postCourse();
-                    this.setState( {courseID: json[json.length-1].id+1})
-                    console.log(this.state.courseID)
-                }
-                this.allLessons();
+                    for (let i = 0; i < json.length; i++) {
+                        if (json[i].courseName === this.state.courseName) {
+                            match = true;
+                            console.log('match')
+                            console.log(match);
+                            this.setState({ courseID: json[i].id })
+                            console.log(this.state.courseID);
+                            alert('You have selected the ' + this.state.courseName + ' course.')
+                        }
+                    }
 
+                    if (match === false) {
+                        alert('You have added the ' + this.state.courseName + ' course.')
+                        this.postCourse();
+                        this.setState({ courseID: json[json.length - 1].id + 1 })
+                        console.log(this.state.courseID)
+                    }
+                    this.allLessons();
+
+                })
             })
+            .then(error => {
+                if (error) throw error
+            })
+    }
+
+
+    ExistingCourse = () => {
+        let url = "/api/courses/";
+        fetch(url, {
+            method: 'GET',
         })
-        .then(error => {
-            if (error) throw error
-        })
+            .then(res => {
+                let foo = res.json();
+                foo.then(json => {
+                    console.log(json)
+                    let match = false;
+
+                    for (let i = 0; i < json.length; i++) {
+                        if (json[i].courseName === this.state.courseName) {
+                            match = true;
+                            console.log('match')
+                            console.log(match);
+                            this.setState({ courseID: json[i].id })
+                            console.log(this.state.courseID);
+                            alert('You have selected the ' + this.state.courseName + ' course.')
+                        }
+                    }
+
+                    if (match === false) {
+                        alert('You have added the ' + this.state.courseName + ' course.')
+                        this.postCourse();
+                        this.setState({ courseID: json[json.length - 1].id + 1 })
+                        console.log(this.state.courseID)
+                    }
+                    this.allLessons();
+
+                })
+            })
+            .then(error => {
+                if (error) throw error
+            })
     }
 
     postCourse = () => {
@@ -136,14 +181,14 @@ class Uploadform extends Component {
                 courseName: this.state.courseName,
                 coursePic: this.state.coursePic
             })
-            
-        }).then(()=>{
+
+        }).then(() => {
             console.log('posted ' + this.state.courseName)
         }
         )
-        .catch(err=>{
-            if (err) throw err
-        })
+            .catch(err => {
+                if (err) throw err
+            })
     }
 
     handleNewCourse = event => {
@@ -158,7 +203,17 @@ class Uploadform extends Component {
             this.newCourse();
         }
     }
-    
+
+    handleExistingCourse = event => {
+        event.preventDefault();
+        if (!this.state.courseName) {
+            alert(`Course Name is a Required Field!`);
+        }
+        else {
+            this.ExistingCourse();
+        }
+    }
+
     allLessons = () => {
         let url = "/api/lesson";
         fetch(url, {
@@ -171,20 +226,20 @@ class Uploadform extends Component {
                 id: this.state.courseID
             })
         })
-        .then((response)=>{
-            response.json().then((data) => {
-                console.log(data);
-                this.setState({lessons : data})
-                this.setState({lessonNum: this.state.lessons.length+1})
+            .then((response) => {
+                response.json().then((data) => {
+                    console.log(data);
+                    this.setState({ lessons: data })
+                    this.setState({ lessonNum: this.state.lessons.length + 1 })
+                })
             })
-        })
-        .catch(err=>{
-            if (err) throw err;
-        });
+            .catch(err => {
+                if (err) throw err;
+            });
     }
 
     postLesson = () => {
-        this.setState({lessonButton: true})
+        this.setState({ lessonButton: true })
 
         let url = "/api/newLesson";
         let quizJSON = `{"question":"${this.state.question}", "answer": "${this.state.answer}", "choices": ["${this.state.a}", "${this.state.b}", "${this.state.c}", "${this.state.d}"]}`
@@ -205,14 +260,14 @@ class Uploadform extends Component {
                 lessonNum: this.state.lessonNum
             })
         })
-        .then((req, response)=>{
-            console.log(req.body)
-            console.log(response);
-            alert(`Congratulations, you have successfully added the lesson ${this.state.lessonMaterial}.`)
-        })
+            .then((req, response) => {
+                console.log(req.body)
+                console.log(response);
+                alert(`Congratulations, you have successfully added the lesson ${this.state.lessonMaterial}.`)
+            })
     }
-    
-    
+
+
 
     handleNewLesson = event => {
         event.preventDefault();
@@ -229,8 +284,8 @@ class Uploadform extends Component {
             alert(`Quiz answer is a Required Field!`);
         }
 
-        if (!this.state.lessonButton){
-        this.postLesson();
+        if (!this.state.lessonButton) {
+            this.postLesson();
         }
     }
 
@@ -243,28 +298,30 @@ class Uploadform extends Component {
                     <div className="col-2"></div>
 
                     <div className="col-8" style={style.content}>
-                    <h5 style={style.title}>Option A: Add a file</h5>
+
+                        <h5 style={style.title}>Option A: Upload Course (.xls or .csv format only)</h5>
 
                         <div className="row">
                             <div className="col-4">
-                        <p>Select a file (.xls or .csv): </p>
-                        <input type="file" name="myFile" />
-                        <br></br>
-                        <br></br>
-                        </div>
+                                <br></br>
+                                <input type="file" name="myFile" />
+                                <br></br>
+                                <br></br>
+                            </div>
                             <div className="col-8">
-                            <br></br>
-                            <p>Model File (Click to download to your computer)</p>
-                            <a href={sample}>
-                            <img src={sample} style={style.img} alt="sample"/>
-                            </a>
+                                <br></br>
+                                <p>Model File (Click to download to your computer)</p>
+                                <a href={sample}>
+                                    <img src={sample} style={style.img} alt="sample" />
+                                </a>
 
                             </div>
-                            </div>
-                            <br></br>
-                            <br></br>
-                        <h5 style={style.title}>Option B: Add Course Using Our Form</h5>
-                        <h5>Step 1: Add Course</h5>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <h5 style={style.title}>Option B: Use Our Form</h5>
+                        <h5><u>Step 1</u></h5>
+                        <h5><i>Add New Course</i></h5>
                         <form>
                             <div className="form-row">
                                 <div className="col">
@@ -275,7 +332,7 @@ class Uploadform extends Component {
                                             id="courseName"
                                             name="courseName"
                                             class="form-control"
-                                            placeholder="Enter course title"
+                                            placeholder="Enter new or existing course title"
                                             value={this.state.courseName}
                                             onChange={this.handleInputChange}>
                                         </input>
@@ -299,28 +356,64 @@ class Uploadform extends Component {
                             <div className="row">
                                 <div className="col-2"></div>
                                 <div className="col-8">
-                                <input type="submit" style={style.btn2} onClick={this.handleNewCourse} value="Add Course " />
-                                <h7 style={style.center}><i>(Must Add Course First Before Adding Lessons)</i></h7>
+                                    <input type="submit" style={style.btn2} onClick={this.handleNewCourse} value="Add New Course " />
+                                    <h7 style={style.center}><i>(*Must* Add Course First Before Adding Lessons)</i></h7>
                                 </div>
-                                </div>
-                                <hr></hr>
+                            </div>
+                            <br></br>
 
-                                <div className="form-row">
-                                    <td>
-                                        <h3>{this.state.courseName} lessons</h3>
+                        <h5><i>Add Lesson to Existing Course</i></h5>
+                        <form>
+                            <div className="form-row">
+                                <div className="col">
+                                    <div className="form-group">
+                                        <label for="CourseName">Course Title</label>
+                                        <input
+                                            type="text"
+                                            id="courseName"
+                                            name="courseName"
+                                            class="form-control"
+                                            placeholder="Enter new or existing course title"
+                                            value={this.state.courseName}
+                                            onChange={this.handleInputChange}>
+                                        </input>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div className="row">
+                                <div className="col-2"></div>
+                                <div className="col-8">
+                                    <input type="submit" style={style.btn2}
+                                    onClick={this.handleExistingCourse}
+                                    value="Add to Existing Course " />
+                                    <h7 style={style.center}></h7>
+                                </div>
+                            </div>
+                            <br></br>
+
+
+
+
+                            <div className="form-row" style={style.courseName}>
+                                <div className="col-4"></div>
+                                <div className="col-4 text-center">
+                                    <div className="row"></div>
+                                    <h3><u>{this.state.courseName}</u></h3>
                                     {this.state.lessons.map(lesson => (
                                         <LessonList
                                             lessonName={lesson.lessonMaterial}
                                             lessonNum={lesson.lessonNum}
-                                            />
+                                        />
                                     ))}
-                                    </td>
                                 </div>
+                            </div>
+                            <br></br>
 
 
                             <div className="form-row">
                                 <div className="col">
-                                <h5>Step 2: Add Lessons</h5>
+                                    <h5>Step 2: Add Lessons</h5>
                                     <div className="form-group">
                                         <label for="lessonMaterial">Lesson Title</label>
                                         <input
@@ -371,7 +464,7 @@ class Uploadform extends Component {
                             </div>
 
                             <div className="form-row">
-                            <label for="quiz">Quiz</label>
+                                <label for="quiz">Quiz</label>
                                 <div className="col-1"></div>
                                 <div className="col">
                                     <div className="form-group">
@@ -384,6 +477,7 @@ class Uploadform extends Component {
                                             value={this.state.question}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <p></p>
                                         <input
                                             type="text"
                                             id="answer"
@@ -393,6 +487,7 @@ class Uploadform extends Component {
                                             value={this.state.answer}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <p></p>
                                         <input
                                             type="text"
                                             id="a"
@@ -402,6 +497,7 @@ class Uploadform extends Component {
                                             value={this.state.a}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <p></p>
                                         <input
                                             type="text"
                                             id="b"
@@ -411,6 +507,7 @@ class Uploadform extends Component {
                                             value={this.state.b}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <p></p>
                                         <input
                                             type="text"
                                             id="c"
@@ -420,6 +517,7 @@ class Uploadform extends Component {
                                             value={this.state.c}
                                             onChange={this.handleInputChange}>
                                         </input>
+                                        <p></p>
                                         <input
                                             type="text"
                                             id="d"
