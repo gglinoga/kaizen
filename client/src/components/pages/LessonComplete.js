@@ -6,7 +6,8 @@ import Course from "../Course/Course.js";
 const style = {
 
     home: {
-        backgroundColor: "silver",
+        background: "url('https://i.pinimg.com/originals/c9/3e/60/c93e60f99f1a8876d3271463a4d93561.png')",
+        backgroundSize: "300px",
         height: "100%",
         width: "100%",
         // position: "absolute",
@@ -17,7 +18,7 @@ const style = {
 
     content: {
         backgroundColor: "white",
-        padding: "0px 30px 100px 30px",
+        padding: "20px 30px 100px 30px",
         minHeight: "1200px",
         textAlign: "center",
     },
