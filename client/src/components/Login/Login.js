@@ -77,6 +77,7 @@ handleInputChange = event => {
 		.catch(error => {
 			if (error) throw error
 		});
+		console.log(`loginuser2` + this.state.loginemail)
 	}
 
 	handleRegisterSubmit = event => {

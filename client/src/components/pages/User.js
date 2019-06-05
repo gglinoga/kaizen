@@ -39,11 +39,12 @@ const style = {
         display: "table",
         margin: "auto",
         width: "100%",
-        height: "auto"
+        height: "auto",
+        fontSize: "20px"
     },
 
     btn2: {
-        backgroundColor: "silver",
+        backgroundColor: "mediumblue",
         color: "white",
         borderRadius: "20px",
         padding: "5px 10px",
