@@ -6,7 +6,7 @@ const style = {
 
     home: {
         background: "url('https://i.pinimg.com/originals/c9/3e/60/c93e60f99f1a8876d3271463a4d93561.png')",
-        backgroundSize: "300px",
+        backgroundSize: "35gi0px",
         height: "auto",
         width: "100%",
         position: "absolute",
@@ -74,6 +74,10 @@ const style = {
 
     img2: {
         maxWidth: "150px"
+    },
+
+    lessonContent: {
+        height: "60px",
     }
 }
 
@@ -471,17 +475,18 @@ class Uploadform extends Component {
 
                         <div className="form-row">
                             <div className="col">
-                                <div className="form-group">
+                                <div className="form-group form-group-lg">
                                     <label for="textContent">Lesson Content</label>
-                                    <input
+                                    <textarea
                                         type="text"
                                         id="textContent"
                                         name="textContent"
-                                        class="form-control"
+                                        class="form-control input-lg"
                                         placeholder="enter lesson content. Type \n at the end of each paragraph."
+                                        rows="15"
                                         value={this.state.textContent}
                                         onChange={this.handleInputChange}>
-                                    </input>
+                                    </textarea>
                                 </div>
                             </div>
                         </div>

@@ -21,6 +21,7 @@ const style = {
         padding: "20px 30px 100px 30px",
         minHeight: "1200px",
         textAlign: "center",
+        fontSize: "70px"
     },
 
     description: {
@@ -104,7 +105,8 @@ class Lesson extends Component {
                 <div className="row">
                         <div className="col-2"></div>
                         <div className="col-8" style={style.content}>
-                        <h2>Good job completing the course! Here are additional courses we recommend:</h2>
+                        <p>Good job completing the course!</p>
+                        <h2>Here are additional courses we recommend:</h2>
 
                             <div className="row" style={style.description}>
                 </div>
