@@ -47,7 +47,8 @@ class Lesson extends Component {
         jsonS: {},
         load: false,
         lessonCount: "",
-        lessonNum: ""
+        lessonNum: "",
+        lessons: []
     };
 
 
@@ -96,7 +97,7 @@ class Lesson extends Component {
             foo.then( (json)=> {
                 console.log(json);
                 console.log(json[0].courseName)
-
+                this.setState({lessons: json})
                 this.setState({courseName: json[this.state.i].courseName}) 
                 this.setState({lessonNames: json[this.state.i].lessonMaterial})
                 this.setState({lessonMaterial: json[this.state.i].textContent})
@@ -138,8 +139,8 @@ class Lesson extends Component {
                  />
                 <div className="container">
                     <Sidenav 
-                    lessonName={this.state.lessonNames}
-                    lessonNum={this.state.lessonNum}
+                        lessons={this.state.lessons}
+              
                     />
                     <div className="row">
                         <div className="col-2"></div>

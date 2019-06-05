@@ -20,6 +20,8 @@ const style = {
 
 
 class Sidenav extends Component {
+
+
 render() {
     return (
         <div className="container">
@@ -44,7 +46,7 @@ render() {
                         <NavText>All lessons</NavText>
                         <NavItem eventKey="lesson1">
                             <NavText>
-                            {this.state.lessons.map(lesson => (
+                            {this.props.lessons.map(lesson => (
                                         <LessonList
                                             lessonName={lesson.lessonMaterial}
                                             lessonNum={lesson.lessonNum}
