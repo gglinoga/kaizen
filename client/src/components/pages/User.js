@@ -64,7 +64,6 @@ class User extends Component {
         return (
             <div>
                 <Navbar />
-                <SideNav />
                 <div style={style.user}>
                     <div className="row"></div>
 
