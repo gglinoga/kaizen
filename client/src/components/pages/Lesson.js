@@ -6,7 +6,8 @@ import Sidenav from '../Sidenav/Sidenav';
 const style = {
 
     home: {
-        backgroundColor: "silver",
+        background: "url('https://i.pinimg.com/originals/c9/3e/60/c93e60f99f1a8876d3271463a4d93561.png')",
+        backgroundSize: "300px",
         height: "auto",
         width: "100%",
         position: "absolute",
