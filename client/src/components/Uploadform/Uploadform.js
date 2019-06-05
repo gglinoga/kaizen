@@ -118,10 +118,7 @@ class Uploadform extends Component {
                             match = true;
                             console.log('match')
                             console.log(match);
-                            this.setState({ 
-                                courseID: json[i].id,
-                                coursePic: json[i].coursePic
-                             })
+                            this.setState({ courseID: json[i].id })
                             console.log(this.state.courseID);
                             alert('You have selected the ' + this.state.courseName + ' course.')
                         }
@@ -159,10 +156,7 @@ class Uploadform extends Component {
                             match = true;
                             console.log('match')
                             console.log(match);
-                            this.setState({ 
-                                courseID: json[i].id,
-                                coursePic: json[i].coursePic
-                             })
+                            this.setState({ courseID: json[i].id })
                             console.log(this.state.courseID);
                             alert('You have selected the ' + this.state.courseName + ' course.')
                         }
@@ -300,13 +294,8 @@ class Uploadform extends Component {
         }
 
         if (!this.state.lessonButton) {
-               this.postAndAllLessons();
+            this.postLesson();
         }
-    }
-
-    postAndAllLessons = ()=> {
-        this.postLesson();
-        setTimeout(this.allLessons, 500);
     }
 
     render() {
@@ -433,6 +422,7 @@ class Uploadform extends Component {
                             <div className="col-4 text-center">
                                 <div className="row"></div>
                                 <h3><u>{this.state.courseName}</u></h3>
+                                <img src={this.state.coursePic}></img>
                                 {this.state.lessons.map(lesson => (
                                     <LessonList
                                         lessonName={lesson.lessonMaterial}
@@ -444,7 +434,20 @@ class Uploadform extends Component {
                         <br></br>
 
 
-
+                        <div className="form-row">
+                            <div className="col-12">
+                                <h5><i>Add Lessons to Course</i></h5>
+                                <div className="form-group">
+                                    <label for="lessonMaterial">Title</label>
+                                    <input
+                                        type="text"
+                                        id="lessonMaterial"
+                                        name="lessonMaterial"
+                                        class="form-control"
+                                        placeholder="enter lesson title"
+                                        value={this.state.lessonMaterial}
+                                        onChange={this.handleInputChange}>
+                                    </input>
                                 </div>
                             </div>
                         </div>
