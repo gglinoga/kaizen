@@ -11,7 +11,7 @@ const style = {
         height: "auto",
         width: "100%",
         position: "absolute",
-        zIndex: -1
+        zIndex: "-2"
     },
 
     content: {
@@ -19,6 +19,8 @@ const style = {
         padding: "0px 30px 100px 30px",
         height: "1000px",
         align: "center",
+        zIndex: "-1"
+
     },
 
     row1: {

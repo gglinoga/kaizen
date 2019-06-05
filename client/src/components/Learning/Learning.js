@@ -8,7 +8,7 @@ const style = {
         fontSize: "24px",
         display: "table",
         margin: "auto",
-        marginBottom: "10px"
+        marginBottom: "10px",
 
     },
 

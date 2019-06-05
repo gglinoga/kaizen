@@ -234,9 +234,14 @@ app.post('/users/login', function (req, res){
     knex('users').select().where({ email: name })
     .then(function (response, err) {
         if (err) throw err;
-        var user = response[0].email;
-        var hash = response[0].password;
-        if (!user) {
+        console.log("test" + response[0])
+        if (response[0]){
+            var user = response[0].email;
+            var hash = response[0].password;
+            console.log(user);
+            console.log(hash)
+        }
+        if (!response[0]) {
             console.log("User Not Found")
         }
         else if (user && !err) {
@@ -268,7 +273,7 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
 
-app.get("/dashboard", passport.authenticate('jwt', { session: false }), function(req, res){
+app.get("/course", passport.authenticate('jwt', { session: false }), function(req, res){
     res.send("it worked! user id is " + req.user.id + '.');
 })
 

@@ -61,7 +61,7 @@ handleInputChange = event => {
 		console.log(this.state.loginpassword)
 	};
 
-	loginUser(req) {
+	loginUser(req, res) {
 		console.log('loginuser')
 		fetch("/users/login", {
 			method: 'POST',
@@ -74,6 +74,13 @@ handleInputChange = event => {
 				password: this.state.loginpassword
 			})
 		})
+		.then((response) => {
+			response.json().then((data) =>
+			console.log(data)
+			)
+		}
+		)
+
 		.catch(error => {
 			if (error) throw error
 		});

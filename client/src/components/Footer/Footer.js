@@ -43,7 +43,7 @@ const Footer = () => (
     <div className="Footer navbar-fixed-bottom" style={style.footer}>
     <div className="row">
         <div className="col-2" style={style.kaizen}>
-            <p>&nbsp;&copy; 2019 kaizen</p>
+        <a href = "mailto: kaizen@kaizen.com"><p>&nbsp;&copy; 2019 kaizen</p></a>
         </div>
         <div className="col-8">
             <div className="row" style={style.links}>
